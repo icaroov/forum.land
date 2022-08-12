@@ -4,21 +4,11 @@ import {
   HTMLChakraProps
 } from '@chakra-ui/react'
 
-export type InputProps = {
-  name: string
-  type?: string
-  placeholder?: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-} & ChakraInputProps &
-  HTMLChakraProps<'input'>
+export type InputProps = ChakraInputProps & HTMLChakraProps<'input'>
 
-const Input = ({ name, type, placeholder, onChange, ...rest }: InputProps) => {
+const Input = ({ ...props }: InputProps) => {
   return (
     <ChakraInput
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      onChange={onChange}
       fontSize="10pt"
       _placeholder={{ color: 'gray.500' }}
       _hover={{
@@ -31,7 +21,7 @@ const Input = ({ name, type, placeholder, onChange, ...rest }: InputProps) => {
         border: '1px solid',
         borderColor: 'pink.500'
       }}
-      {...rest}
+      {...props}
     />
   )
 }

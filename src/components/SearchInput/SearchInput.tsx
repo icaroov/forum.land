@@ -1,5 +1,7 @@
 import { SearchIcon } from '@chakra-ui/icons'
-import { Flex, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+import { Flex, InputGroup, InputLeftElement } from '@chakra-ui/react'
+
+import Input from '@src/components/common/Input'
 
 const SearchInput = () => {
   return (
@@ -13,17 +15,6 @@ const SearchInput = () => {
           type="search"
           placeholder="Pesquisar..."
           fontSize="10pt"
-          _placeholder={{ color: 'gray.500' }}
-          _hover={{
-            bg: 'gray.700',
-            border: '1px solid',
-            borderColor: 'pink.500'
-          }}
-          _focus={{
-            outline: 'none',
-            border: '1px solid',
-            borderColor: 'pink.500'
-          }}
           height="34px"
           background="gray.800"
         />
