@@ -10,6 +10,7 @@ import {
 import { useRecoilState } from 'recoil'
 
 import { authModalAtom } from '@src/atoms/authModalAtom'
+import AuthInputs from '@src/components/auth/AuthInputs'
 
 const AuthModal = () => {
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
@@ -28,23 +29,24 @@ const AuthModal = () => {
       <ModalOverlay />
 
       <ModalContent>
-        <ModalHeader>{modalTitle}</ModalHeader>
-        <ModalCloseButton />
+        <ModalHeader textAlign="center">{modalTitle}</ModalHeader>
+        <ModalCloseButton
+          _focus={{
+            outline: 'none',
+            border: '1px solid',
+            borderColor: 'pink.500'
+          }}
+        />
         <ModalBody
           display="flex"
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
+          pb={6}
         >
-          <Flex
-            direction="column"
-            align="center"
-            justify="center"
-            width="70%"
-            border="1px solid red"
-          >
+          <Flex direction="column" align="center" justify="center" width="70%">
             {/* <OAuthButtons /> */}
-            {/* <AuthInputs /> */}
+            <AuthInputs />
             {/* <ResetPassword /> */}
           </Flex>
         </ModalBody>
