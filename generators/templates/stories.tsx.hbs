@@ -1,10 +1,10 @@
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import {{pascalCase name}} from '.'
 
 export default {
   title: '{{pascalCase name}}',
   component: {{pascalCase name}}
-} as Meta
+} as ComponentMeta<typeof {{pascalCase name}}>
 
-export const Default: Story = () => <{{pascalCase name}} />
+export const Default: ComponentStory<typeof {{pascalCase name}}> = () => <{{pascalCase name}} />
