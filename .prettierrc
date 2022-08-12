@@ -7,8 +7,9 @@
   "singleQuote": true,
   "arrowParens": "avoid",
   "importOrder": [
-    "^components/(.*)$",
-    "^styles/(.*)$",
+    "^@src/(.*)$",
+    "^@components/(.*)$",
+    "^@styles/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,

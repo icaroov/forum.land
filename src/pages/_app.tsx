@@ -1,8 +1,8 @@
 import { CSSReset } from '@chakra-ui/react'
 import { AppProps } from 'next/app'
 
-import Layout from 'components/Layout'
-import MainContainer from 'components/Layout/MainContainer'
+import Layout from '@src/components/Layout'
+import MainContainer from '@src/components/Layout/MainContainer'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -16,6 +16,6 @@ const App = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export { getServerSideProps } from 'components/Layout/MainContainer'
+export { getServerSideProps } from '@src/components/Layout/MainContainer'
 
 export default App

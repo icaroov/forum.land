@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react'
 import { GetServerSidePropsContext } from 'next'
 
-import theme from 'styles/theme'
+import theme from '@src/styles/theme'
 
 type MainContainerProps = {
   cookies: string | undefined

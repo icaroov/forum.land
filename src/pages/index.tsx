@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import Main from 'components/Main'
+import Main from '@src/components/Main'
 
 const Home = () => {
   return (

@@ -1,6 +1,6 @@
 import { Flex, Image } from '@chakra-ui/react'
 
-import SearchInput from 'components/SearchInput'
+import SearchInput from '@src/components/SearchInput'
 
 import RightContent from './components/RightContent'
 
