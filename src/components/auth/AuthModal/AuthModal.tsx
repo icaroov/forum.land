@@ -21,7 +21,7 @@ const AuthModal = () => {
     view === 'login'
       ? 'Login'
       : view === 'register'
-      ? 'Registrar'
+      ? 'Registre-se'
       : 'Resetar senha'
 
   return (
