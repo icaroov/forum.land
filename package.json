@@ -34,7 +34,7 @@
     "@chakra-ui/react": "^2.0.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@fontsource/open-sans": "^4.5.8",
+    "@fontsource/open-sans": "^4.5.12",
     "firebase": "^9.8.1",
     "framer-motion": "^6",
     "husky": "^8.0.1",
