@@ -1,4 +1,5 @@
 import { CSSReset } from '@chakra-ui/react'
+import { appWithTranslation } from 'next-i18next'
 import { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
 
@@ -21,4 +22,4 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 export { getServerSideProps } from '@src/components/Layout/MainContainer/MainContainer'
 
-export default App
+export default appWithTranslation(App)
