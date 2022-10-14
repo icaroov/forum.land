@@ -5,8 +5,6 @@ import { useSetRecoilState } from 'recoil'
 import { authModalAtom } from '@src/atoms/authModalAtom'
 import Input from '@src/components/common/Input'
 
-// export type LoginProps = {}
-
 const EMAIL_INPUT = 'email'
 const PASSWORD_INPUT = 'password'
 
@@ -41,6 +39,7 @@ const Login = () => {
         onChange={updateFormData}
         required
         mb={3}
+        autoFocus
       />
 
       <Input

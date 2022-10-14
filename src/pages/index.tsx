@@ -1,16 +1,11 @@
-import Head from 'next/head'
-
 import Main from '@src/components/Main'
+import BasicPage from '@src/components/common/BasicPage'
 
 const Home = () => {
   return (
-    <>
-      <Head>
-        <title>Home | Raptor</title>
-      </Head>
-
+    <BasicPage meta={{ title: 'Home' }}>
       <Main />
-    </>
+    </BasicPage>
   )
 }
 

@@ -38,8 +38,9 @@ const Register = () => {
         type="email"
         placeholder="E-mail"
         onChange={updateFormData}
-        required
         mb={3}
+        required
+        autoFocus
       />
 
       <Input
