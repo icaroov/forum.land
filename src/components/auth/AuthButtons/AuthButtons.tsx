@@ -3,8 +3,6 @@ import { useSetRecoilState } from 'recoil'
 
 import { authModalAtom } from '@src/atoms/authModalAtom'
 
-// export type AuthButtonsProps = {}
-
 const AuthButtons = () => {
   const setAuthModalState = useSetRecoilState(authModalAtom)
 
