@@ -8,14 +8,18 @@ import {
   ModalOverlay,
   Text
 } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
 import { authModalAtom } from '@src/atoms/authModalAtom'
 import AuthInputs from '@src/components/auth/AuthInputs'
 import OAuthButtons from '@src/components/auth/OAuthButtons'
+import { auth } from '@src/lib/firebase/clientApp'
 
 const AuthModal = () => {
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
+  const [user, _loading, _error] = useAuthState(auth)
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
 
@@ -25,6 +29,11 @@ const AuthModal = () => {
       : view === 'register'
       ? 'Registre-se'
       : 'Resetar senha'
+
+  useEffect(() => {
+    if (user) handleClose()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   return (
     <ChakraModal isOpen={isOpen} onClose={handleClose}>

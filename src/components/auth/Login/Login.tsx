@@ -60,7 +60,7 @@ const Login = () => {
 
       {error && (
         <Text color="red.500" fontSize="sm" mt={2} mb={2} textAlign="center">
-          {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
+          {FIREBASE_ERRORS[error?.message]}
         </Text>
       )}
 

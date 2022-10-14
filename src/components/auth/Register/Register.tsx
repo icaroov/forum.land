@@ -82,8 +82,7 @@ const Register = () => {
 
       {(error || userError) && (
         <Text color="red.500" fontSize="sm" mt={2} mb={2} textAlign="center">
-          {error ||
-            FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
+          {error || FIREBASE_ERRORS[userError?.message as string]}
         </Text>
       )}
 
