@@ -7,4 +7,6 @@ export default {
   component: ResetPassword
 } as ComponentMeta<typeof ResetPassword>
 
-export const Default: ComponentStory<typeof ResetPassword> = () => <ResetPassword />
+export const Default: ComponentStory<typeof ResetPassword> = () => (
+  <ResetPassword />
+)
