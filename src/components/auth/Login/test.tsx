@@ -4,7 +4,7 @@ import Login from '.'
 
 describe('<Login />', () => {
   it('should render the heading', () => {
-    const { container } = render(<Login />)
+    render(<Login />)
 
     expect(screen.getByRole('heading', { name: /Login/i })).toBeInTheDocument()
 

@@ -4,7 +4,11 @@ import BasicPage from '.'
 
 describe('<BasicPage />', () => {
   it('should render the heading', () => {
-    const { container } = render(<BasicPage />)
+    render(
+      <BasicPage>
+        <h1>Heading</h1>
+      </BasicPage>
+    )
 
     expect(
       screen.getByRole('heading', { name: /BasicPage/i })

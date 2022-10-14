@@ -7,4 +7,6 @@ export default {
   component: OAuthButtons
 } as ComponentMeta<typeof OAuthButtons>
 
-export const Default: ComponentStory<typeof OAuthButtons> = () => <OAuthButtons />
+export const Default: ComponentStory<typeof OAuthButtons> = () => (
+  <OAuthButtons />
+)

@@ -4,12 +4,10 @@ import Main from '.'
 
 describe('<Main />', () => {
   it('should render the heading', () => {
-    const { container } = render(<Main />)
+    render(<Main />)
 
     expect(
       screen.getByRole('heading', { name: /main component/i })
     ).toBeInTheDocument()
-
-    expect(container.firstChild).toMatchSnapshot()
   })
 })

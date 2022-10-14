@@ -4,9 +4,11 @@ import OAuthButtons from '.'
 
 describe('<OAuthButtons />', () => {
   it('should render the heading', () => {
-    const { container } = render(<OAuthButtons />)
+    render(<OAuthButtons />)
 
-    expect(screen.getByRole('heading', { name: /OAuthButtons/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /OAuthButtons/i })
+    ).toBeInTheDocument()
 
     // expect(container.firstChild).toMatchSnapshot()
   })

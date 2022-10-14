@@ -4,9 +4,11 @@ import AuthModal from '.'
 
 describe('<AuthModal />', () => {
   it('should render the heading', () => {
-    const { container } = render(<AuthModal />)
+    render(<AuthModal />)
 
-    expect(screen.getByRole('heading', { name: /AuthModal/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /AuthModal/i })
+    ).toBeInTheDocument()
 
     // expect(container.firstChild).toMatchSnapshot()
   })

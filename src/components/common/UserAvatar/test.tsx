@@ -24,7 +24,7 @@ const userMock: Partial<UserType> = {
 
 describe('<UserAvatar />', () => {
   it('should render the heading', () => {
-    const { container } = render(<UserAvatar user={userMock} />)
+    render(<UserAvatar user={userMock} />)
 
     expect(
       screen.getByRole('heading', { name: /UserAvatar/i })

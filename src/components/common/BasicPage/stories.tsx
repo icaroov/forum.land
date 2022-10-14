@@ -7,4 +7,10 @@ export default {
   component: BasicPage
 } as ComponentMeta<typeof BasicPage>
 
-export const Default: ComponentStory<typeof BasicPage> = () => <BasicPage />
+export const Default: ComponentStory<typeof BasicPage> = () => {
+  return (
+    <BasicPage>
+      <h1>BasicPage</h1>
+    </BasicPage>
+  )
+}

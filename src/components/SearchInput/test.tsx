@@ -4,7 +4,7 @@ import SearchInput from '.'
 
 describe('<SearchInput />', () => {
   it('should render the heading', () => {
-    const { container } = render(<SearchInput />)
+    render(<SearchInput />)
 
     expect(
       screen.getByRole('heading', { name: /SearchInput/i })
