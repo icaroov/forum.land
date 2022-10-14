@@ -8,11 +8,13 @@ const FIREBASE = {
   FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 }
 
-const FIREBASE_ERRORS = {
+const FIREBASE_ERRORS: Record<string, string> = {
   'Firebase: Error (auth/email-already-in-use).':
     'Usuário já cadastrado com esse e-mail.',
   'Firebase: Error (auth/user-not-found).': 'E-mail ou senha inválidos.',
-  'Firebase: Error (auth/wrong-password).': 'E-mail ou senha inválidos.'
+  'Firebase: Error (auth/wrong-password).': 'E-mail ou senha inválidos.',
+  'Firebase: Error (auth/popup-closed-by-user).':
+    'Login cancelado, tente novamente.'
 }
 
 export { FIREBASE, FIREBASE_ERRORS }
