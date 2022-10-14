@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from '@chakra-ui/react'
+import { Button, Divider, Flex, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
@@ -48,6 +48,9 @@ const Register = () => {
     setAuthModalState(prev => ({ ...prev, view: 'login' }))
   }
 
+  const isDisabled =
+    !formData.email || !formData.password || !formData.confirmPassword
+
   return (
     <form onSubmit={handleSubmit}>
       <Input
@@ -93,9 +96,12 @@ const Register = () => {
         mb={2}
         type="submit"
         isLoading={loading}
+        disabled={isDisabled}
       >
         Registrar-se
       </Button>
+
+      <Divider orientation="horizontal" mt={4} mb={4} />
 
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={1}>Já possui uma conta?</Text>

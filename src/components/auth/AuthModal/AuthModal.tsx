@@ -15,6 +15,7 @@ import { useRecoilState } from 'recoil'
 import { authModalAtom } from '@src/atoms/authModalAtom'
 import AuthInputs from '@src/components/auth/AuthInputs'
 import OAuthButtons from '@src/components/auth/OAuthButtons'
+import ResetPassword from '@src/components/auth/ResetPassword'
 import { auth } from '@src/lib/firebase/clientApp'
 
 const AuthModal = () => {
@@ -23,12 +24,9 @@ const AuthModal = () => {
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
 
-  const modalTitle =
-    view === 'login'
-      ? 'Login'
-      : view === 'register'
-      ? 'Registre-se'
-      : 'Resetar senha'
+  const isLoginView = view === 'login'
+  const isRegisterView = view === 'register'
+  const isResetPasswordView = view === 'resetPassword'
 
   useEffect(() => {
     if (user) handleClose()
@@ -40,7 +38,12 @@ const AuthModal = () => {
       <ModalOverlay />
 
       <ModalContent>
-        <ModalHeader textAlign="center">{modalTitle}</ModalHeader>
+        <ModalHeader textAlign="center">
+          {isLoginView && 'Login'}
+          {isRegisterView && 'Registre-se'}
+          {isResetPasswordView && 'Esqueci minha senha'}
+        </ModalHeader>
+
         <ModalCloseButton
           _focus={{
             outline: 'none',
@@ -48,6 +51,7 @@ const AuthModal = () => {
             borderColor: 'pink.500'
           }}
         />
+
         <ModalBody
           display="flex"
           flexDirection="column"
@@ -56,12 +60,17 @@ const AuthModal = () => {
           pb={6}
         >
           <Flex direction="column" align="center" justify="center" width="70%">
-            <OAuthButtons />
-            <Text color="gray.600" fontWeight={700}>
-              OU
-            </Text>
-            <AuthInputs />
-            {/* <ResetPassword /> */}
+            {isLoginView || isRegisterView ? (
+              <>
+                <OAuthButtons />
+                <Text color="gray.600" fontWeight={700}>
+                  OU
+                </Text>
+                <AuthInputs />
+              </>
+            ) : (
+              <ResetPassword />
+            )}
           </Flex>
         </ModalBody>
       </ModalContent>

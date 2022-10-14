@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from '@chakra-ui/react'
+import { Button, Divider, Flex, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
@@ -37,6 +37,10 @@ const Login = () => {
     setAuthModalState(prev => ({ ...prev, view: 'register' }))
   }
 
+  const handleClickResetPassword = () => {
+    setAuthModalState(prev => ({ ...prev, view: 'resetPassword' }))
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <Input
@@ -71,18 +75,33 @@ const Login = () => {
         mb={2}
         type="submit"
         isLoading={loading}
+        disabled={!formData.email || !formData.password}
       >
         Login
       </Button>
 
+      <Flex justifyContent="center" mb={2}>
+        <Text
+          fontSize="sm"
+          cursor="pointer"
+          color="gray.500"
+          _hover={{ color: 'blue.100', textDecoration: 'underline' }}
+          onClick={handleClickResetPassword}
+        >
+          Esqueci minha senha
+        </Text>
+      </Flex>
+
+      <Divider orientation="horizontal" mt={4} mb={4} />
+
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={1}>Ainda não possui uma conta?</Text>
         <Text
-          color="pink.500"
           fontWeight={700}
+          color="pink.500"
           cursor="pointer"
-          onClick={handleClickRegister}
           _hover={{ textDecoration: 'underline' }}
+          onClick={handleClickRegister}
         >
           Registre-se agora
         </Text>

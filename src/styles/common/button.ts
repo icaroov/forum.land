@@ -7,6 +7,11 @@ export const Button: ComponentStyleConfig = {
     fontWeight: 700,
     _focus: {
       boxShadow: 'none'
+    },
+    _disabled: {
+      opacity: 0.4,
+      cursor: 'not-allowed',
+      background: 'whiteAlpha.200'
     }
   },
   sizes: {

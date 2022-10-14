@@ -1,4 +1,6 @@
-const FIREBASE = {
+import { BsDot, BsReddit } from 'react-icons/bs'
+
+export const FIREBASE = {
   FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -8,7 +10,7 @@ const FIREBASE = {
   FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 }
 
-const FIREBASE_ERRORS: Record<string, string> = {
+export const FIREBASE_ERRORS: Record<string, string> = {
   'Firebase: Error (auth/email-already-in-use).':
     'Usuário já cadastrado com esse e-mail.',
   'Firebase: Error (auth/user-not-found).': 'E-mail ou senha inválidos.',
@@ -17,4 +19,7 @@ const FIREBASE_ERRORS: Record<string, string> = {
     'Login cancelado, tente novamente.'
 }
 
-export { FIREBASE, FIREBASE_ERRORS }
+export const ICONS = {
+  REDDIT: BsReddit,
+  DOT: BsDot
+}
