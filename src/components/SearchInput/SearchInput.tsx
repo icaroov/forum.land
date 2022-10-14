@@ -17,6 +17,7 @@ const SearchInput = () => {
           fontSize="10pt"
           height="34px"
           background="gray.800"
+          paddingLeft={10}
         />
       </InputGroup>
     </Flex>
