@@ -6,5 +6,9 @@ module.exports = withPWA({
   pwa: {
     dest: 'public',
     disable: !isProd
+  },
+  images: {
+    domains: ['https://lh3.googleusercontent.com'],
+    minimumCacheTTL: 2_630_000
   }
 })
