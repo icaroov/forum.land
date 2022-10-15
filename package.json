@@ -36,7 +36,7 @@
     "@emotion/styled": "^11",
     "@fontsource/open-sans": "^4.5.8",
     "firebase": "^9.8.1",
-    "framer-motion": "^6",
+    "framer-motion": "^7",
     "husky": "^8.0.1",
     "next": "^12.1.6",
     "next-i18next": "^12.1.0",
