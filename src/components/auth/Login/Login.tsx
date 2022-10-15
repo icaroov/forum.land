@@ -1,5 +1,6 @@
 import { Button, Divider, Flex, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next'
+import React, { useRef } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
@@ -8,56 +9,46 @@ import Input from '@src/components/common/Input'
 import { auth } from '@src/lib/firebase/clientApp'
 import { FIREBASE_ERRORS } from '@src/utils/constants'
 
-const EMAIL_INPUT = 'email'
-const PASSWORD_INPUT = 'password'
-
-const initialData = {
-  [EMAIL_INPUT]: '',
-  [PASSWORD_INPUT]: ''
-}
-
 const Login = () => {
-  const [formData, setFormData] = useState(initialData)
+  const { t } = useTranslation('auth')
+
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+
   const setAuthModalState = useSetRecoilState(authModalAtom)
   const [signInWithEmailAndPassword, _, loading, error] =
     useSignInWithEmailAndPassword(auth)
 
-  const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { email, password } = formData
-    signInWithEmailAndPassword(email, password)
+    const data = {
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || ''
+    }
+
+    signInWithEmailAndPassword(data.email, data.password)
   }
 
-  const handleClickRegister = () => {
-    setAuthModalState(prev => ({ ...prev, view: 'register' }))
-  }
-
-  const handleClickResetPassword = () => {
-    setAuthModalState(prev => ({ ...prev, view: 'resetPassword' }))
+  const handleClickModalView = (view: 'register' | 'resetPassword') => {
+    setAuthModalState(prev => ({ ...prev, view }))
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <Input
-        name={EMAIL_INPUT}
+        innerRef={emailRef}
         type="email"
         placeholder="E-mail"
-        onChange={handleDataChange}
         required
         mb={3}
         autoFocus
       />
 
       <Input
-        name={PASSWORD_INPUT}
+        innerRef={passwordRef}
         type="password"
-        placeholder="Senha"
-        onChange={handleDataChange}
+        placeholder={t('modals.login.fields.password')}
         required
         mb={2}
       />
@@ -75,7 +66,6 @@ const Login = () => {
         mb={2}
         type="submit"
         isLoading={loading}
-        disabled={!formData.email || !formData.password}
       >
         Login
       </Button>
@@ -86,7 +76,7 @@ const Login = () => {
           cursor="pointer"
           color="gray.500"
           _hover={{ color: 'blue.100', textDecoration: 'underline' }}
-          onClick={handleClickResetPassword}
+          onClick={() => handleClickModalView('resetPassword')}
         >
           Esqueci minha senha
         </Text>
@@ -101,7 +91,7 @@ const Login = () => {
           color="pink.500"
           cursor="pointer"
           _hover={{ textDecoration: 'underline' }}
-          onClick={handleClickRegister}
+          onClick={() => handleClickModalView('register')}
         >
           Registre-se agora
         </Text>

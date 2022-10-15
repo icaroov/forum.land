@@ -1,5 +1,5 @@
 import { Button, Divider, Flex, Icon, Text } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
@@ -10,7 +10,7 @@ import { ICONS } from '@src/utils/constants'
 
 const ResetPassword = () => {
   const setAuthModalState = useSetRecoilState(authModalAtom)
-  const [email, setEmail] = useState('')
+  const emailRef = useRef<HTMLInputElement>(null)
   const [success, setSuccess] = useState(false)
   const [sendPasswordResetEmail, sending, error] =
     useSendPasswordResetEmail(auth)
@@ -18,9 +18,9 @@ const ResetPassword = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!email) return
+    if (!emailRef.current?.value) return
 
-    await sendPasswordResetEmail(email)
+    await sendPasswordResetEmail(emailRef.current.value)
     setSuccess(true)
   }
 
@@ -51,10 +51,9 @@ const ResetPassword = () => {
 
           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
             <Input
-              name="email"
+              innerRef={emailRef}
               type="email"
               placeholder="E-mail"
-              onChange={e => setEmail(e.target.value)}
               required
               autoFocus
               mb={3}
@@ -69,7 +68,6 @@ const ResetPassword = () => {
               mt={2}
               type="submit"
               isLoading={sending}
-              disabled={!email}
             >
               Resetar senha
             </Button>

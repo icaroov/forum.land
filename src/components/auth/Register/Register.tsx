@@ -1,5 +1,5 @@
 import { Button, Divider, Flex, Text } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
@@ -8,66 +8,55 @@ import Input from '@src/components/common/Input'
 import { auth } from '@src/lib/firebase/clientApp'
 import { FIREBASE_ERRORS } from '@src/utils/constants'
 
-const EMAIL_INPUT = 'email'
-const PASSWORD_INPUT = 'password'
-const CONFIRM_PASSWORD_INPUT = 'confirmPassword'
-
-const initialData = {
-  [EMAIL_INPUT]: '',
-  [PASSWORD_INPUT]: '',
-  [CONFIRM_PASSWORD_INPUT]: ''
-}
-
 const Register = () => {
   const [error, setError] = useState('')
-  const [formData, setFormData] = useState(initialData)
+
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const confirmPasswordRef = useRef<HTMLInputElement>(null)
+
   const setAuthModalState = useSetRecoilState(authModalAtom)
 
   const [createUserWithEmailAndPassword, _, loading, userError] =
     useCreateUserWithEmailAndPassword(auth)
 
-  const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (error) setError('')
 
-    const { email, password, confirmPassword } = formData
+    const data = {
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || '',
+      confirmPassword: confirmPasswordRef.current?.value || ''
+    }
 
-    if (password !== confirmPassword) {
+    if (data.password !== data.confirmPassword) {
       setError('Senhas não conferem')
       return
     }
 
-    createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(data.email, data.password)
   }
 
   const handleClickLogin = () => {
     setAuthModalState(prev => ({ ...prev, view: 'login' }))
   }
 
-  const isDisabled =
-    !formData.email || !formData.password || !formData.confirmPassword
-
   return (
     <form onSubmit={handleSubmit}>
       <Input
-        name={EMAIL_INPUT}
+        innerRef={emailRef}
         type="email"
         placeholder="E-mail"
-        onChange={handleDataChange}
         mb={3}
         required
         autoFocus
       />
 
       <Input
-        name={PASSWORD_INPUT}
+        innerRef={passwordRef}
         type="password"
         placeholder="Senha"
-        onChange={handleDataChange}
         required
         mb={3}
         pattern=".{6,}"
@@ -75,10 +64,9 @@ const Register = () => {
       />
 
       <Input
-        name={CONFIRM_PASSWORD_INPUT}
+        innerRef={confirmPasswordRef}
         type="password"
         placeholder="Confirme sua senha"
-        onChange={handleDataChange}
         required
         mb={2}
       />
@@ -96,7 +84,6 @@ const Register = () => {
         mb={2}
         type="submit"
         isLoading={loading}
-        disabled={isDisabled}
       >
         Registrar-se
       </Button>
