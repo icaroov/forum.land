@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { UserType } from '@src/types/user'
+import { UserType } from '@src/shared/user.type'
 
 import UserAvatar from '.'
 

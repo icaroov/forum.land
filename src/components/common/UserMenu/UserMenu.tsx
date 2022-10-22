@@ -19,9 +19,11 @@ import { MdOutlineLogin } from 'react-icons/md'
 import { VscAccount } from 'react-icons/vsc'
 import { useSetRecoilState } from 'recoil'
 
-import { authModalAtom } from '@src/atoms/authModalAtom'
-import { auth } from '@src/lib/firebase/clientApp'
-import { UserType } from '@src/types/user'
+import { auth } from '@lib/firebase/clientApp'
+
+import { authModalAtom } from '@atoms/authModalAtom'
+
+import { UserType } from '@shared/user.type'
 
 const ICONS = {
   REDDIT: FaRedditSquare,

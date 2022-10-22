@@ -8,6 +8,7 @@
       "@utils/*": ["src/utils/*"],
       "@lib/*": ["src/lib/*"],
       "@atoms/*": ["src/atoms/*"],
+      "@shared/*": ["src/shared/*"],
     },
     "target": "es5",
     "lib": [
