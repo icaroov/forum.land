@@ -8,19 +8,31 @@ import {
   ModalOverlay,
   Text
 } from '@chakra-ui/react'
+import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
-import { authModalAtom } from '@src/atoms/authModalAtom'
-import AuthInputs from '@src/components/auth/AuthInputs'
-import OAuthButtons from '@src/components/auth/OAuthButtons'
-import ResetPassword from '@src/components/auth/ResetPassword'
-import { auth } from '@src/lib/firebase/clientApp'
+import { auth } from '@lib/firebase/clientApp'
+
+import { authModalAtom } from '@atoms/authModalAtom'
+
+import AuthInputs from '@components/auth/AuthInputs'
+import OAuthButtons from '@components/auth/OAuthButtons'
+import ResetPassword from '@components/auth/ResetPassword'
 
 const AuthModal = () => {
+  const { t } = useTranslation('auth')
+
+  const trans = {
+    login: t('login.title'),
+    register: t('register.title'),
+    forgotPassword: t('login.buttons.forgotPassword'),
+    or: t('login.or')
+  }
+
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
-  const [user, _loading, _error] = useAuthState(auth)
+  const [user] = useAuthState(auth)
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
 
@@ -39,9 +51,9 @@ const AuthModal = () => {
 
       <ModalContent>
         <ModalHeader textAlign="center">
-          {isLoginView && 'Login'}
-          {isRegisterView && 'Registre-se'}
-          {isResetPasswordView && 'Esqueci minha senha'}
+          {isLoginView && trans.login}
+          {isRegisterView && trans.register}
+          {isResetPasswordView && trans.forgotPassword}
         </ModalHeader>
 
         <ModalCloseButton
@@ -64,7 +76,7 @@ const AuthModal = () => {
               <>
                 <OAuthButtons />
                 <Text color="gray.600" fontWeight={700}>
-                  OU
+                  {trans.or.toUpperCase()}
                 </Text>
                 <AuthInputs />
               </>

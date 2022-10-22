@@ -25,7 +25,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const translations = await serverSideTranslations(locale, [
     'home',
     'common',
-    'auth'
+    'auth',
+    'menu'
   ])
 
   return {
