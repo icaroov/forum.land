@@ -8,11 +8,10 @@
   "arrowParens": "avoid",
   "importOrder": [
     "^@src/(.*)$",
-    "^@src/lib/(.*)$",
-    "^@src/atoms/(.*)$",
-    "^@src/components/(.*)$",
-    "^@src/utils/(.*)$",
+    "^@lib/(.*)$",
+    "^@atoms/(.*)$",
     "^@components/(.*)$",
+    "^@utils/(.*)$",
     "^@styles/(.*)$",
     "^[./]"
   ],
