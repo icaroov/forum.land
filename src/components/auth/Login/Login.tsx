@@ -4,13 +4,25 @@ import React, { useRef } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
-import { authModalAtom } from '@src/atoms/authModalAtom'
-import Input from '@src/components/common/Input'
-import { auth } from '@src/lib/firebase/clientApp'
-import { FIREBASE_ERRORS } from '@src/utils/constants'
+import { auth } from '@lib/firebase/clientApp'
+
+import { authModalAtom } from '@atoms/authModalAtom'
+
+import Input from '@components/common/Input'
+
+import { FIREBASE_ERRORS } from '@utils/constants'
 
 const Login = () => {
   const { t } = useTranslation('auth')
+
+  const trans = {
+    email: t('login.fields.email'),
+    password: t('login.fields.password'),
+    login: t('login.title'),
+    forgotPassword: t('login.buttons.forgotPassword'),
+    dontHaveAccount: t('login.buttons.dontHaveAccount'),
+    register: t('login.buttons.register_link')
+  }
 
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -39,7 +51,7 @@ const Login = () => {
       <Input
         innerRef={emailRef}
         type="email"
-        placeholder="E-mail"
+        placeholder={trans.email}
         required
         mb={3}
         autoFocus
@@ -48,7 +60,7 @@ const Login = () => {
       <Input
         innerRef={passwordRef}
         type="password"
-        placeholder={t('modals.login.fields.password')}
+        placeholder={trans.password}
         required
         mb={2}
       />
@@ -67,7 +79,7 @@ const Login = () => {
         type="submit"
         isLoading={loading}
       >
-        Login
+        {trans.login}
       </Button>
 
       <Flex justifyContent="center" mb={2}>
@@ -78,14 +90,14 @@ const Login = () => {
           _hover={{ color: 'blue.100', textDecoration: 'underline' }}
           onClick={() => handleClickModalView('resetPassword')}
         >
-          Esqueci minha senha
+          {trans.forgotPassword}
         </Text>
       </Flex>
 
       <Divider orientation="horizontal" mt={4} mb={4} />
 
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>Ainda não possui uma conta?</Text>
+        <Text mr={1}>{trans.dontHaveAccount}</Text>
         <Text
           fontWeight={700}
           color="pink.500"
@@ -93,7 +105,7 @@ const Login = () => {
           _hover={{ textDecoration: 'underline' }}
           onClick={() => handleClickModalView('register')}
         >
-          Registre-se agora
+          {trans.register}
         </Text>
       </Flex>
     </form>

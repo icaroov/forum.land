@@ -1,5 +1,6 @@
 import { Button, Flex, Image } from '@chakra-ui/react'
 import { signOut } from 'firebase/auth'
+import { useTranslation } from 'next-i18next'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import { auth } from '@lib/firebase/clientApp'
@@ -7,11 +8,11 @@ import { auth } from '@lib/firebase/clientApp'
 import SearchInput from '@components/SearchInput'
 import AuthButtons from '@components/auth/AuthButtons'
 import AuthModal from '@components/auth/AuthModal'
-import LanguagesSelect from '@components/common/LanguagesSelect'
 import UserAvatar from '@components/common/UserAvatar'
 
 const Navbar = () => {
-  const [user, _loading, _error] = useAuthState(auth)
+  const { t } = useTranslation('auth')
+  const [user] = useAuthState(auth)
 
   return (
     <>
@@ -47,16 +48,12 @@ const Navbar = () => {
                 variant="outline"
                 onClick={() => signOut(auth)}
               >
-                Sair
+                {t('logout.title')}
               </Button>
             </>
           ) : (
             <AuthButtons />
           )}
-        </Flex>
-
-        <Flex alignItems="center">
-          <LanguagesSelect />
         </Flex>
       </Flex>
     </>
