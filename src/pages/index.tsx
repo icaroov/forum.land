@@ -1,13 +1,12 @@
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import Main from '@src/components/Main'
-import BasicPage from '@src/components/common/BasicPage'
+import BasicPage from '@components/common/BasicPage'
 
 const Home = () => {
   return (
     <BasicPage meta={{ title: 'Home' }}>
-      <Main />
+      <h1>Main Content</h1>
     </BasicPage>
   )
 }
@@ -23,9 +22,15 @@ export const getServerSideProps: GetServerSideProps = async ({
     'public, s-maxage=30, stale-while-revalidate=2630000'
   )
 
+  const translations = await serverSideTranslations(locale, [
+    'home',
+    'common',
+    'auth'
+  ])
+
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'common', 'auth']))
+      ...translations
     }
   }
 }
