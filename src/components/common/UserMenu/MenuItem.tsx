@@ -1,17 +1,14 @@
 import { MenuItem as ChakraMenuItem, Flex, Icon } from '@chakra-ui/react'
 import { IconType } from 'react-icons/lib'
 
-const MenuItem = ({
-  icon,
-  text,
-  onClick,
-  size = 20
-}: {
-  icon: IconType
+type MenuItemProps = {
   text: string
+  icon: IconType
   onClick?: () => void
   size?: number
-}) => (
+}
+
+const MenuItem = ({ text, icon, onClick, size = 20 }: MenuItemProps) => (
   <ChakraMenuItem
     fontSize="sm"
     fontWeight={700}
