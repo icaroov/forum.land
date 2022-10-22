@@ -1,6 +1,5 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
-  MenuItem as ChakraMenuItem,
   Flex,
   Icon,
   Menu,
@@ -14,7 +13,6 @@ import { useTranslation } from 'next-i18next'
 import { CgProfile } from 'react-icons/cg'
 import { FaRedditSquare } from 'react-icons/fa'
 import { IoSparkles } from 'react-icons/io5'
-import { IconType } from 'react-icons/lib'
 import { MdOutlineLogin } from 'react-icons/md'
 import { VscAccount } from 'react-icons/vsc'
 import { useSetRecoilState } from 'recoil'
@@ -24,6 +22,8 @@ import { auth } from '@lib/firebase/clientApp'
 import { authModalAtom } from '@atoms/authModalAtom'
 
 import { UserType } from '@shared/user.type'
+
+import MenuItem from './MenuItem'
 
 const ICONS = {
   REDDIT: FaRedditSquare,
@@ -37,30 +37,6 @@ const ICONS = {
 export type UserMenuProps = {
   user?: UserType | null
 }
-
-const MenuItem = ({
-  icon,
-  text,
-  onClick,
-  size = 20
-}: {
-  icon: IconType
-  text: string
-  onClick?: () => void
-  size?: number
-}) => (
-  <ChakraMenuItem
-    fontSize="sm"
-    fontWeight={700}
-    _hover={{ bg: 'pink.500', color: 'white' }}
-    onClick={onClick}
-  >
-    <Flex alignItems="center">
-      <Icon as={icon} fontSize={size} marginRight={2} />
-      {text}
-    </Flex>
-  </ChakraMenuItem>
-)
 
 const UserMenu = ({ user }: UserMenuProps) => {
   const { t } = useTranslation('menu')
