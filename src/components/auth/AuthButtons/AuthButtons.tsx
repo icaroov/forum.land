@@ -1,9 +1,17 @@
 import { Button, Flex } from '@chakra-ui/react'
+import { useTranslation } from 'next-i18next'
 import { useSetRecoilState } from 'recoil'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
 const AuthButtons = () => {
+  const { t } = useTranslation('auth')
+
+  const trans = {
+    login: t('login.title'),
+    register: t('register.title')
+  }
+
   const setAuthModalState = useSetRecoilState(authModalAtom)
 
   const handleClick = (view: 'login' | 'register') =>
@@ -19,7 +27,7 @@ const AuthButtons = () => {
         width={{ base: '70px', md: '110px' }}
         onClick={() => handleClick('login')}
       >
-        Login
+        {trans.login}
       </Button>
 
       <Button
@@ -29,7 +37,7 @@ const AuthButtons = () => {
         width={{ base: '70px', md: '110px' }}
         onClick={() => handleClick('register')}
       >
-        Registrar
+        {trans.register}
       </Button>
     </Flex>
   )

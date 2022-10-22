@@ -1,4 +1,5 @@
 import { Button, Flex, Image, Text } from '@chakra-ui/react'
+import { useTranslation } from 'next-i18next'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 
 import { auth } from '@lib/firebase/clientApp'
@@ -6,6 +7,12 @@ import { auth } from '@lib/firebase/clientApp'
 import { FIREBASE_ERRORS } from '@utils/constants'
 
 const OAuthButtons = () => {
+  const { t } = useTranslation('auth')
+
+  const trans = {
+    google: t('login.buttons.google')
+  }
+
   const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth)
 
   return (
@@ -16,7 +23,7 @@ const OAuthButtons = () => {
         onClick={() => signInWithGoogle()}
       >
         <Image src="/assets/img/googlelogo.png" height="20px" mr={4} />
-        <Text>Continue com uma conta Google</Text>
+        <Text>{trans.google}</Text>
       </Button>
 
       {error && (

@@ -1,4 +1,5 @@
 import { Button, Divider, Flex, Icon, Text } from '@chakra-ui/react'
+import { useTranslation } from 'next-i18next'
 import { useRef, useState } from 'react'
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
 import { BsDot, BsReddit } from 'react-icons/bs'
@@ -16,6 +17,17 @@ export const ICONS = {
 }
 
 const ResetPassword = () => {
+  const { t } = useTranslation('auth')
+
+  const trans = {
+    resetPassword: t('resetPassword.title'),
+    resetPasswordDescription: t('resetPassword.text.email'),
+    checkEmail: t('resetPassword.text.checkEmail'),
+    checkSpam: t('resetPassword.text.checkSpam'),
+    login: t('resetPassword.text.login'),
+    register: t('resetPassword.text.register')
+  }
+
   const setAuthModalState = useSetRecoilState(authModalAtom)
   const emailRef = useRef<HTMLInputElement>(null)
   const [success, setSuccess] = useState(false)
@@ -44,16 +56,15 @@ const ResetPassword = () => {
       <Icon as={ICONS.REDDIT} color="green.200" fontSize={40} mb={4} />
       {success ? (
         <Flex flexDirection="column" alignItems="center">
-          <Text fontSize={25}>Uhul, veja seu e-mail! 🥳</Text>
+          <Text fontSize={25}>{trans.checkEmail} 🥳</Text>
           <Text fontSize="sm" color="gray.500">
-            Cheque também sua caixa de spam.
+            {trans.checkSpam}
           </Text>
         </Flex>
       ) : (
         <>
           <Text fontSize="sm" textAlign="center" mb={2}>
-            Digite o e-mail associado à sua conta e nós lhe enviaremos um link
-            para redefinir sua senha.
+            {trans.resetPasswordDescription}
           </Text>
 
           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
@@ -76,7 +87,7 @@ const ResetPassword = () => {
               type="submit"
               isLoading={sending}
             >
-              Resetar senha
+              {trans.resetPassword}
             </Button>
           </form>
         </>
@@ -92,7 +103,7 @@ const ResetPassword = () => {
           onClick={handleClickLogin}
           _hover={{ textDecoration: 'underline' }}
         >
-          Faça login
+          {trans.login}
         </Text>
         <Icon as={ICONS.DOT} />
         <Text
@@ -102,7 +113,7 @@ const ResetPassword = () => {
           _hover={{ textDecoration: 'underline' }}
           onClick={handleClickRegister}
         >
-          Registre-se
+          {trans.register}
         </Text>
       </Flex>
     </Flex>
