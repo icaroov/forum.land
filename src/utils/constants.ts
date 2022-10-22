@@ -1,5 +1,3 @@
-import { BsDot, BsReddit } from 'react-icons/bs'
-
 export const FIREBASE = {
   FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -17,9 +15,4 @@ export const FIREBASE_ERRORS: Record<string, string> = {
   'Firebase: Error (auth/wrong-password).': 'E-mail ou senha inválidos.',
   'Firebase: Error (auth/popup-closed-by-user).':
     'Login cancelado, tente novamente.'
-}
-
-export const ICONS = {
-  REDDIT: BsReddit,
-  DOT: BsDot
 }

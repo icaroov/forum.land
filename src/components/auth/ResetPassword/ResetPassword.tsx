@@ -1,12 +1,17 @@
 import { Button, Divider, Flex, Icon, Text } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
+import { BsDot, BsReddit } from 'react-icons/bs'
 import { useSetRecoilState } from 'recoil'
 
 import { authModalAtom } from '@src/atoms/authModalAtom'
 import Input from '@src/components/common/Input'
 import { auth } from '@src/lib/firebase/clientApp'
-import { ICONS } from '@src/utils/constants'
+
+export const ICONS = {
+  REDDIT: BsReddit,
+  DOT: BsDot
+}
 
 const ResetPassword = () => {
   const setAuthModalState = useSetRecoilState(authModalAtom)

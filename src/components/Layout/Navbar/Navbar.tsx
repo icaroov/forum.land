@@ -1,19 +1,11 @@
-import { Button, Flex, Image } from '@chakra-ui/react'
-import { signOut } from 'firebase/auth'
-import { useTranslation } from 'next-i18next'
-import { useAuthState } from 'react-firebase-hooks/auth'
-
-import { auth } from '@lib/firebase/clientApp'
+import { Flex, Image } from '@chakra-ui/react'
 
 import SearchInput from '@components/SearchInput'
-import AuthButtons from '@components/auth/AuthButtons'
 import AuthModal from '@components/auth/AuthModal'
-import UserAvatar from '@components/common/UserAvatar'
+
+import RightContent from './RightContent'
 
 const Navbar = () => {
-  const { t } = useTranslation('auth')
-  const [user] = useAuthState(auth)
-
   return (
     <>
       <AuthModal />
@@ -37,24 +29,7 @@ const Navbar = () => {
 
         <SearchInput />
 
-        <Flex justify="center" align="center" gap={2}>
-          {user ? (
-            <>
-              <UserAvatar user={user} />
-
-              <Button
-                width={user.displayName ? 'unset' : '100px'}
-                height="28px"
-                variant="outline"
-                onClick={() => signOut(auth)}
-              >
-                {t('logout.title')}
-              </Button>
-            </>
-          ) : (
-            <AuthButtons />
-          )}
-        </Flex>
+        <RightContent />
       </Flex>
     </>
   )
