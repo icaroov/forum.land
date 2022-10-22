@@ -2,11 +2,13 @@ import { Button, Flex, Image } from '@chakra-ui/react'
 import { signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
-import SearchInput from '@src/components/SearchInput'
-import AuthButtons from '@src/components/auth/AuthButtons'
-import AuthModal from '@src/components/auth/AuthModal'
-import UserAvatar from '@src/components/common/UserAvatar'
-import { auth } from '@src/lib/firebase/clientApp'
+import { auth } from '@lib/firebase/clientApp'
+
+import SearchInput from '@components/SearchInput'
+import AuthButtons from '@components/auth/AuthButtons'
+import AuthModal from '@components/auth/AuthModal'
+import LanguagesSelect from '@components/common/LanguagesSelect'
+import UserAvatar from '@components/common/UserAvatar'
 
 const Navbar = () => {
   const [user, _loading, _error] = useAuthState(auth)
@@ -51,6 +53,10 @@ const Navbar = () => {
           ) : (
             <AuthButtons />
           )}
+        </Flex>
+
+        <Flex alignItems="center">
+          <LanguagesSelect />
         </Flex>
       </Flex>
     </>
