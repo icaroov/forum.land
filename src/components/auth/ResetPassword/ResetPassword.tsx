@@ -4,9 +4,11 @@ import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
 import { BsDot, BsReddit } from 'react-icons/bs'
 import { useSetRecoilState } from 'recoil'
 
-import { authModalAtom } from '@src/atoms/authModalAtom'
-import Input from '@src/components/common/Input'
-import { auth } from '@src/lib/firebase/clientApp'
+import { auth } from '@lib/firebase/clientApp'
+
+import { authModalAtom } from '@atoms/authModalAtom'
+
+import Input from '@components/common/Input'
 
 export const ICONS = {
   REDDIT: BsReddit,

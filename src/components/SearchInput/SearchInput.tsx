@@ -1,7 +1,7 @@
 import { SearchIcon } from '@chakra-ui/icons'
 import { Flex, InputGroup, InputLeftElement } from '@chakra-ui/react'
 
-import Input from '@src/components/common/Input'
+import Input from '@components/common/Input'
 
 const SearchInput = () => {
   return (

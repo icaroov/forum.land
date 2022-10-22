@@ -1,4 +1,4 @@
-import Navbar from '@src/components/Layout/Navbar'
+import Navbar from '@components/Layout/Navbar'
 
 type LayoutProps = {
   children: React.ReactNode

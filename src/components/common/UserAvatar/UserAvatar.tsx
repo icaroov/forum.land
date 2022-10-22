@@ -1,6 +1,6 @@
 import { Avatar, Text } from '@chakra-ui/react'
 
-import { UserType } from '@src/shared/user.type'
+import { UserType } from '@shared/user.type'
 
 export type UserAvatarProps = {
   user: Partial<UserType>

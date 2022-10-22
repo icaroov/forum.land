@@ -3,10 +3,13 @@ import { useRef, useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
-import { authModalAtom } from '@src/atoms/authModalAtom'
-import Input from '@src/components/common/Input'
-import { auth } from '@src/lib/firebase/clientApp'
-import { FIREBASE_ERRORS } from '@src/utils/constants'
+import { auth } from '@lib/firebase/clientApp'
+
+import { authModalAtom } from '@atoms/authModalAtom'
+
+import Input from '@components/common/Input'
+
+import { FIREBASE_ERRORS } from '@utils/constants'
 
 const Register = () => {
   const [error, setError] = useState('')
