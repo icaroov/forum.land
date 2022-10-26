@@ -3,8 +3,8 @@ import { useRecoilValue } from 'recoil'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
-import Login from '@components/auth/Login'
-import Register from '@components/auth/Register'
+import Login from '@components/forms/Login'
+import Register from '@components/forms/Register'
 
 const AuthInputs = () => {
   const { view } = useRecoilValue(authModalAtom)

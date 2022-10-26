@@ -1,7 +1,7 @@
 import { Flex, Image } from '@chakra-ui/react'
 
-import SearchInput from '@components/SearchInput'
 import AuthModal from '@components/auth/AuthModal'
+import SearchInput from '@components/common/SearchInput'
 
 import RightContent from './RightContent'
 

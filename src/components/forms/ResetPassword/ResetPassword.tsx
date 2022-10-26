@@ -24,8 +24,8 @@ const ResetPassword = () => {
     resetPasswordDescription: t('resetPassword.text.email'),
     checkEmail: t('resetPassword.text.checkEmail'),
     checkSpam: t('resetPassword.text.checkSpam'),
-    login: t('resetPassword.text.login'),
-    register: t('resetPassword.text.register')
+    login: t('resetPassword.link.login'),
+    register: t('resetPassword.link.register')
   }
 
   const setAuthModalState = useSetRecoilState(authModalAtom)
