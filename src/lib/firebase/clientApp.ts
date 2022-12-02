@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
-import { FIREBASE } from '@utils/constants'
+import { FIREBASE } from '@src/constants/firebase'
 
 const firebaseConfig = {
   apiKey: FIREBASE.FIREBASE_API_KEY,

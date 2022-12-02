@@ -4,13 +4,13 @@ import { useRef, useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
+import { FIREBASE_ERRORS } from '@src/constants/firebase'
+
 import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
 import Input from '@components/common/Input'
-
-import { FIREBASE_ERRORS } from '@utils/constants'
 
 const Register = () => {
   const { t } = useTranslation('auth')

@@ -2,9 +2,9 @@ import { Button, Flex, Image, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 
-import { auth } from '@lib/firebase/clientApp'
+import { FIREBASE_ERRORS } from '@src/constants/firebase'
 
-import { FIREBASE_ERRORS } from '@utils/constants'
+import { auth } from '@lib/firebase/clientApp'
 
 const OAuthButtons = () => {
   const { t } = useTranslation('auth')
