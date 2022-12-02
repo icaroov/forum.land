@@ -7,7 +7,7 @@
       "@styles/*": ["src/styles/*"],
       "@lib/*": ["src/lib/*"],
       "@atoms/*": ["src/atoms/*"],
-      "@shared/*": ["src/shared/*"],
+      "@shared/*": ["src/shared/*"]
     },
     "target": "es5",
     "lib": [
