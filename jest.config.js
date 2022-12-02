@@ -29,9 +29,13 @@ const customJestConfig = {
   ],
   collectCoverageFrom: [
     'src/**/*.ts(x)?',
-    '!./pages/**/*.tsx',
-    '!src/lib/theme.tsx',
-    '!src/lib/apolloClient.tsx'
+    '!src/pages/**/*.tsx',
+    '!src/constants/**/*.ts',
+    '!src/config/**/*.ts',
+    '!src/styles/**/*.ts',
+    '!src/lib/firebase/clientApp.ts',
+    '!src/config/test/**/*.ts(x)?',
+    '!src/atoms/**/*.ts(x)?'
   ],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   modulePaths: [compilerOptions.baseUrl],
