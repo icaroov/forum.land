@@ -13,14 +13,13 @@ import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
-import ResetPassword from '@src/components/forms/ResetPassword'
-
 import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
 import AuthInputs from '@components/auth/AuthInputs'
 import OAuthButtons from '@components/auth/OAuthButtons'
+import ResetPassword from '@components/forms/ResetPassword'
 
 const AuthModal = () => {
   const { t } = useTranslation('auth')
