@@ -76,8 +76,12 @@ const AuthModal = () => {
               <>
                 <OAuthButtons />
 
-                <Text color="gray.600" fontWeight={700}>
-                  {trans.or.toUpperCase()}
+                <Text
+                  color="gray.600"
+                  fontWeight={700}
+                  textTransform="uppercase"
+                >
+                  {trans.or}
                 </Text>
 
                 <AuthInputs view={view} />
