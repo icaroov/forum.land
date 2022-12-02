@@ -80,7 +80,7 @@ const AuthModal = () => {
                   {trans.or.toUpperCase()}
                 </Text>
 
-                <AuthInputs />
+                <AuthInputs view={view} />
               </>
             ) : (
               <ResetPassword />

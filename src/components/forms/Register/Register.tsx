@@ -55,7 +55,7 @@ const Register = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="register-form">
       <Input
         innerRef={emailRef}
         type="email"

@@ -47,7 +47,7 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="login-form">
       <Input
         innerRef={emailRef}
         type="email"
