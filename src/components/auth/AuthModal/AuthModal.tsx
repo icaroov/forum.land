@@ -11,6 +11,7 @@ import {
 import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
 import { auth } from '@lib/firebase/clientApp'
@@ -32,6 +33,7 @@ const AuthModal = () => {
   }
 
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
+  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth)
   const [user] = useAuthState(auth)
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
@@ -74,7 +76,11 @@ const AuthModal = () => {
           <Flex direction="column" align="center" justify="center" width="70%">
             {isLoginView || isRegisterView ? (
               <>
-                <OAuthButtons />
+                <OAuthButtons
+                  signInWithGoogle={signInWithGoogle}
+                  loading={loading}
+                  error={error}
+                />
 
                 <Text
                   color="gray.600"

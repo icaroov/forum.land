@@ -8,6 +8,7 @@
   "arrowParens": "avoid",
   "importOrder": [
     "^@src/(.*)$",
+    "^@public/(.*)$",
     "^@lib/(.*)$",
     "^@atoms/(.*)$",
     "^@shared/(.*)$",

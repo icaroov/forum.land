@@ -1,20 +1,30 @@
 import { Button, Flex, Image, Text } from '@chakra-ui/react'
-import { TFunction, useTranslation } from 'next-i18next'
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { AuthError, CustomParameters, UserCredential } from 'firebase/auth'
+import { useTranslation } from 'next-i18next'
 
 import { FIREBASE_ERRORS } from '@src/constants/firebase'
 
-import { auth } from '@lib/firebase/clientApp'
+type SignInWithGoogleType = (
+  scopes?: string[] | undefined,
+  customOAuthParameters?: CustomParameters | undefined
+) => Promise<UserCredential | undefined>
 
-export const trans = (t: TFunction) => ({
-  google: t('login.buttons.google')
-})
+type OAuthButtonsProps = {
+  signInWithGoogle: SignInWithGoogleType
+  loading: boolean
+  error: AuthError | undefined
+}
 
-const OAuthButtons = () => {
+const OAuthButtons = ({
+  signInWithGoogle,
+  loading,
+  error
+}: OAuthButtonsProps) => {
   const { t } = useTranslation('auth')
-  const { google } = trans(t)
 
-  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth)
+  const trans = {
+    google: t('login.buttons.google')
+  }
 
   return (
     <Flex direction="column" width="100%" mb={4}>
@@ -29,7 +39,7 @@ const OAuthButtons = () => {
           height="20px"
           mr={4}
         />
-        <Text>{google}</Text>
+        <Text>{trans.google}</Text>
       </Button>
 
       {error && (

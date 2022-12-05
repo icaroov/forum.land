@@ -15,10 +15,7 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase for Server Side Rendering
-export const app =
-  typeof window !== 'undefined' && !getApps().length
-    ? initializeApp(firebaseConfig)
-    : getApp()
+export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
 
 export const firestore = getFirestore(app)
 export const auth = getAuth(app)
