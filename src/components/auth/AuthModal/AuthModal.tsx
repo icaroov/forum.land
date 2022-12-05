@@ -10,7 +10,10 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import {
+  useSendPasswordResetEmail,
+  useSignInWithGoogle
+} from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
 import { auth } from '@lib/firebase/clientApp'
@@ -38,7 +41,9 @@ const AuthModal = ({ user }: AuthModalProps) => {
   }
 
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
-  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth)
+  const [signInWithGoogle, _, loading, signInError] = useSignInWithGoogle(auth)
+  const [sendPasswordResetEmail, sending, sendPasswordError] =
+    useSendPasswordResetEmail(auth)
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
 
@@ -83,7 +88,7 @@ const AuthModal = ({ user }: AuthModalProps) => {
                 <OAuthButtons
                   signInWithGoogle={signInWithGoogle}
                   loading={loading}
-                  error={error}
+                  error={signInError}
                 />
 
                 <Text
@@ -97,7 +102,11 @@ const AuthModal = ({ user }: AuthModalProps) => {
                 <AuthInputs view={view} />
               </>
             ) : (
-              <ResetPassword />
+              <ResetPassword
+                sendPasswordResetEmail={sendPasswordResetEmail}
+                loading={sending}
+                error={sendPasswordError}
+              />
             )}
           </Flex>
         </ModalBody>

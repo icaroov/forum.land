@@ -1,18 +1,17 @@
 import { Button, Flex, Image, Text } from '@chakra-ui/react'
-import { AuthError, CustomParameters, UserCredential } from 'firebase/auth'
 import { useTranslation } from 'next-i18next'
 
 import { FIREBASE_ERRORS } from '@src/constants/firebase'
 
-type SignInWithGoogleType = (
-  scopes?: string[] | undefined,
-  customOAuthParameters?: CustomParameters | undefined
-) => Promise<UserCredential | undefined>
+import type {
+  FirebaseErrorType,
+  SignInWithGoogleType
+} from '@shared/firebaseMethods.types'
 
 type OAuthButtonsProps = {
   signInWithGoogle: SignInWithGoogleType
   loading: boolean
-  error: AuthError | undefined
+  error: FirebaseErrorType
 }
 
 const OAuthButtons = ({

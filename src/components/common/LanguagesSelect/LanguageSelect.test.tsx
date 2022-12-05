@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 
 import { renderWithProviders } from '@src/config/test/renderWithProviders'
 
-import LanguagesSelect from './LanguagesSelect'
+import LanguagesSelect from '.'
 
 describe('<LanguageSelect />', () => {
   it('should render the component correctly', () => {

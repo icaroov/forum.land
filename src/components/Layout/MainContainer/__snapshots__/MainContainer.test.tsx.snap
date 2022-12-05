@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MainContainer /> should render the component correctly 1`] = `
+<div>
+  <h1>
+    Test
+  </h1>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
