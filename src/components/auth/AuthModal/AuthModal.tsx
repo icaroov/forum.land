@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
@@ -18,11 +17,17 @@ import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
+import { UserType } from '@shared/user.type'
+
 import AuthInputs from '@components/auth/AuthInputs'
 import OAuthButtons from '@components/auth/OAuthButtons'
 import ResetPassword from '@components/forms/ResetPassword'
 
-const AuthModal = () => {
+type AuthModalProps = {
+  user: UserType
+}
+
+const AuthModal = ({ user }: AuthModalProps) => {
   const { t } = useTranslation('auth')
 
   const trans = {
@@ -34,7 +39,6 @@ const AuthModal = () => {
 
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
   const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth)
-  const [user] = useAuthState(auth)
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
 

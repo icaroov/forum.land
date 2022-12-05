@@ -1,21 +1,24 @@
 import { Flex, Image } from '@chakra-ui/react'
-import { useAuthState } from 'react-firebase-hooks/auth'
 
-import MainMenu from '@src/components/common/MainMenu'
-import { auth } from '@src/lib/firebase/clientApp'
+import { UserType } from '@shared/user.type'
 
 import AuthModal from '@components/auth/AuthModal'
+import MainMenu from '@components/common/MainMenu'
 import SearchInput from '@components/common/SearchInput'
 
 import RightContent from './RightContent'
 
-const Navbar = () => {
-  const [user] = useAuthState(auth)
+type NavbarProps = {
+  user: UserType
+}
+
+const Navbar = ({ user }: NavbarProps) => {
   return (
     <>
-      <AuthModal />
+      <AuthModal user={user} />
 
       <Flex
+        as="nav"
         bg="gray.800"
         height="55px"
         padding="6px 12px"
@@ -41,7 +44,7 @@ const Navbar = () => {
 
         <SearchInput user={user} />
 
-        <RightContent />
+        <RightContent user={user} />
       </Flex>
     </>
   )
