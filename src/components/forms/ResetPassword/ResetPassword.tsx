@@ -1,13 +1,15 @@
 import { Button, Divider, Flex, Icon, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRef, useState } from 'react'
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
 import { BsDot, BsReddit } from 'react-icons/bs'
 import { useSetRecoilState } from 'recoil'
 
-import { auth } from '@lib/firebase/clientApp'
-
 import { authModalAtom } from '@atoms/authModalAtom'
+
+import type {
+  FirebaseErrorType,
+  SendPasswordResetEmailErrorType
+} from '@shared/firebaseMethods.types'
 
 import Input from '@components/common/Input'
 
@@ -16,7 +18,17 @@ export const ICONS = {
   DOT: BsDot
 }
 
-const ResetPassword = () => {
+type ResetPasswordProps = {
+  sendPasswordResetEmail: SendPasswordResetEmailErrorType
+  loading: boolean
+  error: FirebaseErrorType
+}
+
+const ResetPassword = ({
+  sendPasswordResetEmail,
+  loading,
+  error
+}: ResetPasswordProps) => {
   const { t } = useTranslation('auth')
 
   const trans = {
@@ -31,8 +43,6 @@ const ResetPassword = () => {
   const setAuthModalState = useSetRecoilState(authModalAtom)
   const emailRef = useRef<HTMLInputElement>(null)
   const [success, setSuccess] = useState(false)
-  const [sendPasswordResetEmail, sending, error] =
-    useSendPasswordResetEmail(auth)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -85,7 +95,7 @@ const ResetPassword = () => {
               mb={2}
               mt={2}
               type="submit"
-              isLoading={sending}
+              isLoading={loading}
             >
               {trans.resetPassword}
             </Button>
