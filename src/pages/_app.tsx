@@ -24,6 +24,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export { getServerSideProps } from '@src/components/Layout/MainContainer/MainContainer'
-
 export default appWithTranslation(App)
