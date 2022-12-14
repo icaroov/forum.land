@@ -4,12 +4,14 @@ import { useRef, useState } from 'react'
 import { BsDot, BsReddit } from 'react-icons/bs'
 import { useSetRecoilState } from 'recoil'
 
+import { ViewEnum } from '@src/shared/enums/View.enum'
+
 import { authModalAtom } from '@atoms/authModalAtom'
 
 import type {
   FirebaseErrorType,
   SendPasswordResetEmailErrorType
-} from '@shared/firebaseMethods.types'
+} from '@shared/types/firebaseMethods.types'
 
 import Input from '@components/common/Input'
 
@@ -54,11 +56,11 @@ const ResetPassword = ({
   }
 
   const handleClickRegister = () => {
-    setAuthModalState(prev => ({ ...prev, view: 'register' }))
+    setAuthModalState(prev => ({ ...prev, view: ViewEnum.REGISTER }))
   }
 
   const handleClickLogin = () => {
-    setAuthModalState(prev => ({ ...prev, view: 'login' }))
+    setAuthModalState(prev => ({ ...prev, view: ViewEnum.LOGIN }))
   }
 
   return (

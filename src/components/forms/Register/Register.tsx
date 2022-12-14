@@ -5,6 +5,7 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
 import { FIREBASE_ERRORS } from '@src/constants/firebase'
+import { ViewEnum } from '@src/shared/enums/View.enum'
 
 import { auth } from '@lib/firebase/clientApp'
 
@@ -51,7 +52,7 @@ const Register = () => {
   }
 
   const handleClickLogin = () => {
-    setAuthModalState(prev => ({ ...prev, view: 'login' }))
+    setAuthModalState(prev => ({ ...prev, view: ViewEnum.LOGIN }))
   }
 
   return (

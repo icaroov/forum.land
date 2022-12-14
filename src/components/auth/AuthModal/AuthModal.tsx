@@ -16,11 +16,13 @@ import {
 } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
+import { ViewEnum } from '@src/shared/enums/View.enum'
+
 import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
-import { UserType } from '@shared/user.type'
+import { UserType } from '@shared/types/user.type'
 
 import AuthInputs from '@components/auth/AuthInputs'
 import OAuthButtons from '@components/auth/OAuthButtons'
@@ -47,9 +49,9 @@ const AuthModal = ({ user }: AuthModalProps) => {
 
   const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
 
-  const isLoginView = view === 'login'
-  const isRegisterView = view === 'register'
-  const isResetPasswordView = view === 'resetPassword'
+  const isLoginView = view === ViewEnum.LOGIN
+  const isRegisterView = view === ViewEnum.REGISTER
+  const isResetPasswordView = view === ViewEnum.RESET_PASSWORD
 
   useEffect(() => {
     if (user) handleClose()

@@ -2,17 +2,19 @@ import { Box } from '@chakra-ui/react'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 
+type MetaType = {
+  title: string
+}
+
 export type BasicPageProps = {
   children: ReactNode
-  meta?: {
-    title: string
-  }
+  meta?: Partial<MetaType>
 }
 
 const BasicPage = ({ children, meta }: BasicPageProps) => {
   return (
     <>
-      {meta && (
+      {!!meta && (
         <Head>
           <title>{`${meta.title} | Reddit`}</title>
         </Head>

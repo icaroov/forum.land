@@ -3,7 +3,7 @@ import { Flex, Icon, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { TiHome } from 'react-icons/ti'
 
-import CommunitiesMenu from '../CommunitiesMenu/CommunitiesMenu'
+import CommunitiesMenu from '../CommunitiesMenu'
 
 const ICONS = {
   HOME: TiHome,

@@ -1,4 +1,4 @@
-import { UserType } from '@shared/user.type'
+import { UserType } from '@shared/types/user.type'
 
 export const mockedUser: UserType = {
   uid: '123',

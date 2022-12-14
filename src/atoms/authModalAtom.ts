@@ -1,13 +1,15 @@
 import { atom } from 'recoil'
 
+import { ViewEnum } from '@shared/enums/View.enum'
+
 export type AuthModalStateType = {
   isOpen: boolean
-  view: 'login' | 'register' | 'resetPassword'
+  view: ViewEnum.LOGIN | ViewEnum.REGISTER | ViewEnum.RESET_PASSWORD
 }
 
 const defaultModalState: AuthModalStateType = {
   isOpen: false,
-  view: 'login'
+  view: ViewEnum.LOGIN
 }
 
 export const authModalAtom = atom<AuthModalStateType>({

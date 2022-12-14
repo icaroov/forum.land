@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 
-import { UserType } from '@shared/user.type'
+import type { UserType } from '@shared/types/user.type'
 
 import AuthButtons from '@components/auth/AuthButtons'
 import UserMenu from '@components/common/UserMenu'

@@ -6,7 +6,7 @@ import { FIREBASE_ERRORS } from '@src/constants/firebase'
 import type {
   FirebaseErrorType,
   SignInWithGoogleType
-} from '@shared/firebaseMethods.types'
+} from '@shared/types/firebaseMethods.types'
 
 type OAuthButtonsProps = {
   signInWithGoogle: SignInWithGoogleType

@@ -5,6 +5,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
 import { FIREBASE_ERRORS } from '@src/constants/firebase'
+import { ViewEnum } from '@src/shared/enums/View.enum'
 
 import { auth } from '@lib/firebase/clientApp'
 
@@ -42,7 +43,9 @@ const Login = () => {
     signInWithEmailAndPassword(data.email, data.password)
   }
 
-  const handleClickModalView = (view: 'register' | 'resetPassword') => {
+  const handleClickModalView = (
+    view: ViewEnum.REGISTER | ViewEnum.RESET_PASSWORD
+  ) => {
     setAuthModalState(prev => ({ ...prev, view }))
   }
 
@@ -88,7 +91,7 @@ const Login = () => {
           cursor="pointer"
           color="gray.500"
           _hover={{ color: 'blue.100', textDecoration: 'underline' }}
-          onClick={() => handleClickModalView('resetPassword')}
+          onClick={() => handleClickModalView(ViewEnum.RESET_PASSWORD)}
         >
           {trans.forgotPassword}
         </Text>
@@ -103,7 +106,7 @@ const Login = () => {
           color="pink.500"
           cursor="pointer"
           _hover={{ textDecoration: 'underline' }}
-          onClick={() => handleClickModalView('register')}
+          onClick={() => handleClickModalView(ViewEnum.REGISTER)}
         >
           {trans.register}
         </Text>
