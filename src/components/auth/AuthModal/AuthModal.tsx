@@ -22,7 +22,7 @@ import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
-import { UserType } from '@shared/types/user.type'
+import type { UserType } from '@shared/types/user.type'
 
 import AuthInputs from '@components/auth/AuthInputs'
 import OAuthButtons from '@components/auth/OAuthButtons'

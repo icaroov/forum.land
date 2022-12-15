@@ -17,13 +17,15 @@ const Input = ({ innerRef, ...props }: InputProps) => {
       _placeholder={{ color: 'gray.500' }}
       ref={innerRef}
       _hover={{
-        bg: 'gray.700',
         border: '1px solid',
         borderColor: 'pink.500'
       }}
       _focus={{
         outline: 'none',
         border: '1px solid',
+        borderColor: 'pink.500'
+      }}
+      _focusVisible={{
         borderColor: 'pink.500'
       }}
       {...props}

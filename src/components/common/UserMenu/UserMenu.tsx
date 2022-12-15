@@ -17,13 +17,15 @@ import { MdOutlineLogin } from 'react-icons/md'
 import { VscAccount } from 'react-icons/vsc'
 import { useSetRecoilState } from 'recoil'
 
+import { ViewEnum } from '@src/shared/enums/View.enum'
+
 import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
 import type { UserType } from '@shared/types/user.type'
 
-import MenuItem from './MenuItem'
+import MenuItem from '../MenuItem'
 
 const ICONS = {
   REDDIT: FaRedditSquare,
@@ -35,7 +37,7 @@ const ICONS = {
 }
 
 export type UserMenuProps = {
-  user?: UserType | null
+  user?: UserType
 }
 
 const UserMenu = ({ user }: UserMenuProps) => {
@@ -57,11 +59,11 @@ const UserMenu = ({ user }: UserMenuProps) => {
         cursor="pointer"
         padding="0x 6x"
         borderRadius={4}
+        transition="all 0.2s"
         _hover={{
           outline: '1px solid',
           outlineColor: 'gray.400'
         }}
-        transition="all 0.2s"
       >
         <Flex alignItems="center">
           <Flex alignItems="center">
@@ -116,7 +118,9 @@ const UserMenu = ({ user }: UserMenuProps) => {
             <MenuItem
               icon={ICONS.LOGIN}
               text={trans.loginOrRegister}
-              onClick={() => setAuthModalState({ isOpen: true, view: 'login' })}
+              onClick={() =>
+                setAuthModalState({ isOpen: true, view: ViewEnum.LOGIN })
+              }
             />
           </>
         )}
