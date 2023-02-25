@@ -24,7 +24,7 @@ import type { UserType } from '@shared/types/user.type'
 
 import AuthInputs from '@components/auth/AuthInputs'
 import OAuthButtons from '@components/auth/OAuthButtons'
-import ResetPassword from '@components/forms/ResetPassword'
+import ResetPasswordForm from '@components/forms/ResetPasswordForm'
 
 type AuthModalProps = {
   user: UserType
@@ -93,7 +93,7 @@ const AuthModal = ({ user }: AuthModalProps) => {
                 <AuthInputs view={view} />
               </>
             ) : (
-              <ResetPassword
+              <ResetPasswordForm
                 sendPasswordResetEmail={sendPasswordResetEmail}
                 loading={sending}
                 error={sendPasswordError}

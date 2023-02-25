@@ -12,7 +12,7 @@ import { authModalAtom } from '@atoms/authModalAtom'
 
 import Input from '@components/common/Input'
 
-const Login = () => {
+const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -103,4 +103,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginForm

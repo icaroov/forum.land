@@ -3,14 +3,14 @@ import { act, fireEvent, screen } from '@testing-library/react'
 import { authModalAtom } from '@src/atoms/authModalAtom'
 import { renderWithProviders } from '@src/config/test/renderWithProviders'
 
-import ResetPassword from '.'
+import ResetPasswordForm from '.'
 
-describe('<ResetPassword />', () => {
+describe('<ResetPasswordForm />', () => {
   it('should render the component correctly', () => {
     const sendPasswordResetEmailMocked = jest.fn()
 
     renderWithProviders(
-      <ResetPassword
+      <ResetPasswordForm
         sendPasswordResetEmail={sendPasswordResetEmailMocked}
         loading={false}
         error={undefined}
@@ -30,7 +30,7 @@ describe('<ResetPassword />', () => {
     const sendPasswordResetEmailMocked = jest.fn()
 
     renderWithProviders(
-      <ResetPassword
+      <ResetPasswordForm
         sendPasswordResetEmail={sendPasswordResetEmailMocked}
         loading={false}
         error={undefined}
@@ -56,7 +56,7 @@ describe('<ResetPassword />', () => {
     const setAuthModalStateMocked = jest.fn()
 
     renderWithProviders(
-      <ResetPassword
+      <ResetPasswordForm
         sendPasswordResetEmail={sendPasswordResetEmailMocked}
         loading={false}
         error={undefined}
@@ -81,7 +81,7 @@ describe('<ResetPassword />', () => {
     const setAuthModalStateMocked = jest.fn()
 
     renderWithProviders(
-      <ResetPassword
+      <ResetPasswordForm
         sendPasswordResetEmail={sendPasswordResetEmailMocked}
         loading={false}
         error={undefined}
@@ -105,7 +105,7 @@ describe('<ResetPassword />', () => {
     const sendPasswordResetEmailMocked = jest.fn()
 
     renderWithProviders(
-      <ResetPassword
+      <ResetPasswordForm
         sendPasswordResetEmail={sendPasswordResetEmailMocked}
         loading={false}
         error={undefined}

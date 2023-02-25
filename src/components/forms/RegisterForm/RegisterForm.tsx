@@ -12,7 +12,7 @@ import { authModalAtom } from '@atoms/authModalAtom'
 
 import Input from '@components/common/Input'
 
-const Register = () => {
+const RegisterForm = () => {
   const [error, setError] = useState('')
 
   const emailRef = useRef<HTMLInputElement>(null)
@@ -110,4 +110,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default RegisterForm

@@ -25,7 +25,7 @@ type ResetPasswordProps = {
   error: FirebaseErrorType
 }
 
-const ResetPassword = ({
+const ResetPasswordForm = ({
   sendPasswordResetEmail,
   loading,
   error
@@ -122,4 +122,4 @@ const ResetPassword = ({
   )
 }
 
-export default ResetPassword
+export default ResetPasswordForm
