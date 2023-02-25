@@ -17,9 +17,9 @@ describe('<ResetPassword />', () => {
       />
     )
 
-    const resetPasswordText = screen.getByText('resetPassword.title')
+    const resetPasswordText = screen.getByText(/resetar senha/i)
     const resetPasswordDescriptionText = screen.getByText(
-      'resetPassword.text.email'
+      /digite seu e-mail e enviaremos um link para você redefinir sua senha./i
     )
 
     expect(resetPasswordText).toBeInTheDocument()
@@ -39,7 +39,7 @@ describe('<ResetPassword />', () => {
 
     const emailInput = screen.getByPlaceholderText('E-mail')
     const submitButton = screen.getByRole('button', {
-      name: 'resetPassword.title'
+      name: /resetar senha/i
     })
 
     act(() => {
@@ -67,7 +67,7 @@ describe('<ResetPassword />', () => {
       }
     )
 
-    const loginLink = screen.getByText('resetPassword.link.login')
+    const loginLink = screen.getByText(/entrar/i)
 
     act(() => {
       fireEvent.click(loginLink)
@@ -92,7 +92,7 @@ describe('<ResetPassword />', () => {
       }
     )
 
-    const registerLink = screen.getByText('resetPassword.link.register')
+    const registerLink = screen.getByText(/criar conta/i)
 
     act(() => {
       fireEvent.click(registerLink)
@@ -114,7 +114,7 @@ describe('<ResetPassword />', () => {
 
     const emailInput = screen.getByPlaceholderText('E-mail')
     const submitButton = screen.getByRole('button', {
-      name: 'resetPassword.title'
+      name: /resetar senha/i
     })
 
     act(() => {

@@ -1,5 +1,4 @@
 import { Button, Divider, Flex, Text } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import React, { useRef } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
@@ -14,17 +13,6 @@ import { authModalAtom } from '@atoms/authModalAtom'
 import Input from '@components/common/Input'
 
 const Login = () => {
-  const { t } = useTranslation('auth')
-
-  const trans = {
-    email: t('login.fields.email'),
-    password: t('login.fields.password'),
-    login: t('login.title'),
-    forgotPassword: t('login.buttons.forgotPassword'),
-    dontHaveAccount: t('login.buttons.dontHaveAccount'),
-    register: t('login.buttons.register_link')
-  }
-
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -54,7 +42,7 @@ const Login = () => {
       <Input
         innerRef={emailRef}
         type="email"
-        placeholder={trans.email}
+        placeholder="Seu melhor e-mail"
         required
         mb={3}
         autoFocus
@@ -63,7 +51,7 @@ const Login = () => {
       <Input
         innerRef={passwordRef}
         type="password"
-        placeholder={trans.password}
+        placeholder="Sua senha secreta"
         required
         mb={2}
       />
@@ -82,7 +70,7 @@ const Login = () => {
         type="submit"
         isLoading={loading}
       >
-        {trans.login}
+        Entrar
       </Button>
 
       <Flex justifyContent="center" mb={2}>
@@ -93,14 +81,14 @@ const Login = () => {
           _hover={{ color: 'blue.100', textDecoration: 'underline' }}
           onClick={() => handleClickModalView(ViewEnum.RESET_PASSWORD)}
         >
-          {trans.forgotPassword}
+          Esqueci minha senha
         </Text>
       </Flex>
 
       <Divider orientation="horizontal" mt={4} mb={4} />
 
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>{trans.dontHaveAccount}</Text>
+        <Text mr={1}>Ainda não possui uma conta?</Text>
         <Text
           fontWeight={700}
           color="pink.500"
@@ -108,7 +96,7 @@ const Login = () => {
           _hover={{ textDecoration: 'underline' }}
           onClick={() => handleClickModalView(ViewEnum.REGISTER)}
         >
-          {trans.register}
+          Cadastre-se
         </Text>
       </Flex>
     </form>

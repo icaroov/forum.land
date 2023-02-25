@@ -9,9 +9,9 @@ describe('<AuthButtons />', () => {
   renderWithProviders(<AuthButtons />)
 
   it('should renders correctly', () => {
-    const loginButton = screen.getByRole('button', { name: 'login.title' })
+    const loginButton = screen.getByRole('button', { name: 'Login' })
     const registerButton = screen.getByRole('button', {
-      name: 'register.title'
+      name: 'Cadastre-se'
     })
 
     expect(loginButton).toBeInTheDocument()
@@ -27,7 +27,7 @@ describe('<AuthButtons />', () => {
     })
 
     const registerButton = screen.getByRole('button', {
-      name: 'register.title'
+      name: 'Cadastre-se'
     })
 
     fireEvent.click(registerButton)
@@ -43,7 +43,7 @@ describe('<AuthButtons />', () => {
       handler: onClick
     })
 
-    const loginButton = screen.getByRole('button', { name: 'login.title' })
+    const loginButton = screen.getByRole('button', { name: 'Login' })
 
     fireEvent.click(loginButton)
 

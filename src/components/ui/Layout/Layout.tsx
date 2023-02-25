@@ -1,6 +1,6 @@
-import { UserType } from '@shared/user.type'
+import { UserType } from '@shared/types/user.type'
 
-import Navbar from '@components/Layout/Navbar'
+import Navbar from '../Navbar'
 
 type LayoutProps = {
   children: React.ReactNode

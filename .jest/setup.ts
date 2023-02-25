@@ -1,18 +1,5 @@
 import '@testing-library/jest-dom'
 
-jest.mock('next-i18next', () => ({
-  ...jest.requireActual('next-i18next'),
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
-
 jest.mock('firebase/auth', () => {
   return {
     getAuth: jest.fn()

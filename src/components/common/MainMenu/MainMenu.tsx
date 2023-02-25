@@ -1,6 +1,5 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Flex, Icon, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import { TiHome } from 'react-icons/ti'
 
 import CommunitiesMenu from '../CommunitiesMenu'
@@ -11,12 +10,6 @@ const ICONS = {
 }
 
 const MainMenu = () => {
-  const { t } = useTranslation('menu')
-
-  const trans = {
-    home: t('mainMenu.home')
-  }
-
   return (
     <Menu>
       <MenuButton
@@ -44,9 +37,10 @@ const MainMenu = () => {
             />
 
             <Flex display={{ base: 'none', lg: 'flex' }}>
-              <Text fontSize="10pt">{trans.home}</Text>
+              <Text fontSize="10pt">Início</Text>
             </Flex>
           </Flex>
+
           {ICONS.CHEVRON_DOWN}
         </Flex>
       </MenuButton>

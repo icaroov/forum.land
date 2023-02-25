@@ -9,7 +9,6 @@ import {
   Text
 } from '@chakra-ui/react'
 import { signOut } from 'firebase/auth'
-import { useTranslation } from 'next-i18next'
 import { CgProfile } from 'react-icons/cg'
 import { FaRedditSquare } from 'react-icons/fa'
 import { IoSparkles } from 'react-icons/io5'
@@ -41,13 +40,11 @@ export type UserMenuProps = {
 }
 
 const UserMenu = ({ user }: UserMenuProps) => {
-  const { t } = useTranslation('menu')
-
-  const trans = {
-    profile: t('profile'),
-    logout: t('logout'),
-    loginOrRegister: t('loginOrRegister')
-  }
+  // const trans = {
+  //   profile: t('profile'),
+  //   logout: t('logout'),
+  //   loginOrRegister: t('loginOrRegister')
+  // }
 
   const setAuthModalState = useSetRecoilState(authModalAtom)
 
@@ -105,11 +102,11 @@ const UserMenu = ({ user }: UserMenuProps) => {
       <MenuList>
         {user ? (
           <>
-            <MenuItem icon={ICONS.PROFILE} text={trans.profile} />
+            <MenuItem icon={ICONS.PROFILE} text="Perfil" />
             <MenuDivider />
             <MenuItem
               icon={ICONS.LOGIN}
-              text={trans.logout}
+              text="Sair"
               onClick={() => signOut(auth)}
             />
           </>
@@ -117,7 +114,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
           <>
             <MenuItem
               icon={ICONS.LOGIN}
-              text={trans.loginOrRegister}
+              text="Entrar / Registrar"
               onClick={() =>
                 setAuthModalState({ isOpen: true, view: ViewEnum.LOGIN })
               }

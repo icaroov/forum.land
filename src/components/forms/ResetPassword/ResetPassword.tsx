@@ -1,5 +1,4 @@
 import { Button, Divider, Flex, Icon, Text } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import { useRef, useState } from 'react'
 import { BsDot, BsReddit } from 'react-icons/bs'
 import { useSetRecoilState } from 'recoil'
@@ -31,17 +30,6 @@ const ResetPassword = ({
   loading,
   error
 }: ResetPasswordProps) => {
-  const { t } = useTranslation('auth')
-
-  const trans = {
-    resetPassword: t('resetPassword.title'),
-    resetPasswordDescription: t('resetPassword.text.email'),
-    checkEmail: t('resetPassword.text.checkEmail'),
-    checkSpam: t('resetPassword.text.checkSpam'),
-    login: t('resetPassword.link.login'),
-    register: t('resetPassword.link.register')
-  }
-
   const setAuthModalState = useSetRecoilState(authModalAtom)
   const emailRef = useRef<HTMLInputElement>(null)
   const [success, setSuccess] = useState(false)
@@ -51,8 +39,9 @@ const ResetPassword = ({
 
     if (!emailRef.current?.value) return
 
-    await sendPasswordResetEmail(emailRef.current.value)
     setSuccess(true)
+
+    await sendPasswordResetEmail(emailRef.current.value)
   }
 
   const handleClickRegister = () => {
@@ -68,15 +57,16 @@ const ResetPassword = ({
       <Icon as={ICONS.REDDIT} color="green.200" fontSize={40} mb={4} />
       {success ? (
         <Flex flexDirection="column" alignItems="center">
-          <Text fontSize={25}>{trans.checkEmail} 🥳</Text>
+          <Text fontSize={25}>Uhul, veja seu e-mail! 🥳</Text>
           <Text fontSize="sm" color="gray.500">
-            {trans.checkSpam}
+            Cheque também sua caixa de spam.
           </Text>
         </Flex>
       ) : (
         <>
           <Text fontSize="sm" textAlign="center" mb={2}>
-            {trans.resetPasswordDescription}
+            Digite seu e-mail e enviaremos um link para você redefinir sua
+            senha.
           </Text>
 
           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
@@ -99,7 +89,7 @@ const ResetPassword = ({
               type="submit"
               isLoading={loading}
             >
-              {trans.resetPassword}
+              Resetar senha
             </Button>
           </form>
         </>
@@ -115,7 +105,7 @@ const ResetPassword = ({
           onClick={handleClickLogin}
           _hover={{ textDecoration: 'underline' }}
         >
-          {trans.login}
+          Entrar
         </Text>
         <Icon as={ICONS.DOT} />
         <Text
@@ -125,7 +115,7 @@ const ResetPassword = ({
           _hover={{ textDecoration: 'underline' }}
           onClick={handleClickRegister}
         >
-          {trans.register}
+          Criar conta
         </Text>
       </Flex>
     </Flex>

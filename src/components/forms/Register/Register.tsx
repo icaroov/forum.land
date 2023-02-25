@@ -1,5 +1,4 @@
 import { Button, Divider, Flex, Text } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import { useRef, useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
@@ -14,14 +13,6 @@ import { authModalAtom } from '@atoms/authModalAtom'
 import Input from '@components/common/Input'
 
 const Register = () => {
-  const { t } = useTranslation('auth')
-
-  const trans = {
-    register: t('register.title'),
-    alreadyAccount: t('register.buttons.alreadyAccount'),
-    createAccount: t('register.buttons.createAccount')
-  }
-
   const [error, setError] = useState('')
 
   const emailRef = useRef<HTMLInputElement>(null)
@@ -98,13 +89,13 @@ const Register = () => {
         type="submit"
         isLoading={loading}
       >
-        {trans.register}
+        Criar conta
       </Button>
 
       <Divider orientation="horizontal" mt={4} mb={4} />
 
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>{trans.alreadyAccount}</Text>
+        <Text mr={1}>Já tem uma conta?</Text>
         <Text
           color="pink.500"
           fontWeight={700}
@@ -112,7 +103,7 @@ const Register = () => {
           onClick={handleClickLogin}
           _hover={{ textDecoration: 'underline' }}
         >
-          {trans.createAccount}
+          Entrar
         </Text>
       </Flex>
     </form>

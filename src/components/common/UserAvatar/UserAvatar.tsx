@@ -16,6 +16,7 @@ const UserAvatar = ({ user }: UserAvatarProps) => {
         src={user.photoURL || ''}
         height="100%"
       />
+
       <Text>{user.displayName}</Text>
     </>
   )

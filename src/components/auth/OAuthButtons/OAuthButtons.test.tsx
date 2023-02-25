@@ -17,7 +17,7 @@ describe('<OAuthButtons />', () => {
     )
 
     const googleButton = screen.getByRole('button', {
-      name: /login.buttons.google/i
+      name: /Continue com uma conta Google/i
     })
     const googleImage = googleButton.querySelector('img')
 
@@ -37,7 +37,7 @@ describe('<OAuthButtons />', () => {
     )
 
     const googleButton = screen.getByRole('button', {
-      name: /login.buttons.google/i
+      name: /Continue com uma conta Google/i
     })
     const loadingText = screen.getByText(/loading/i)
 
@@ -57,7 +57,7 @@ describe('<OAuthButtons />', () => {
     )
 
     const googleButton = screen.getByRole('button', {
-      name: /login.buttons.google/i
+      name: /Continue com uma conta Google/i
     })
 
     googleButton.click()

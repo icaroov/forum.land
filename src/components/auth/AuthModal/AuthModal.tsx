@@ -8,7 +8,6 @@ import {
   ModalOverlay,
   Text
 } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import {
   useSendPasswordResetEmail,
@@ -16,12 +15,11 @@ import {
 } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
 
-import { ViewEnum } from '@src/shared/enums/View.enum'
-
 import { auth } from '@lib/firebase/clientApp'
 
 import { authModalAtom } from '@atoms/authModalAtom'
 
+import { ViewEnum } from '@shared/enums/View.enum'
 import type { UserType } from '@shared/types/user.type'
 
 import AuthInputs from '@components/auth/AuthInputs'
@@ -33,15 +31,6 @@ type AuthModalProps = {
 }
 
 const AuthModal = ({ user }: AuthModalProps) => {
-  const { t } = useTranslation('auth')
-
-  const trans = {
-    login: t('login.title'),
-    register: t('register.title'),
-    forgotPassword: t('login.buttons.forgotPassword'),
-    or: t('login.or')
-  }
-
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
   const [signInWithGoogle, _, loading, signInError] = useSignInWithGoogle(auth)
   const [sendPasswordResetEmail, sending, sendPasswordError] =
@@ -64,9 +53,9 @@ const AuthModal = ({ user }: AuthModalProps) => {
 
       <ModalContent>
         <ModalHeader textAlign="center">
-          {isLoginView && trans.login}
-          {isRegisterView && trans.register}
-          {isResetPasswordView && trans.forgotPassword}
+          {isLoginView && 'Login'}
+          {isRegisterView && 'Cadastre-se'}
+          {isResetPasswordView && 'Esqueci minha senha'}
         </ModalHeader>
 
         <ModalCloseButton
@@ -98,7 +87,7 @@ const AuthModal = ({ user }: AuthModalProps) => {
                   fontWeight={700}
                   textTransform="uppercase"
                 >
-                  {trans.or}
+                  ou
                 </Text>
 
                 <AuthInputs view={view} />
