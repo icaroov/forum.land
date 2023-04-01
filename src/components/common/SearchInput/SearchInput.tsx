@@ -7,11 +7,17 @@ import Input from '@components/common/Input'
 
 type SearchInputProps = {
   user?: UserType | undefined
+  maxWidth?: string
 }
 
-const SearchInput = ({ user }: SearchInputProps) => {
+const SearchInput = ({ user, maxWidth = 'auto' }: SearchInputProps) => {
   return (
-    <Flex flexGrow={1} maxWidth={user ? 'auto' : '600px'} mr={2} align="center">
+    <Flex
+      flexGrow={1}
+      maxWidth={user ? maxWidth : '600px'}
+      mr={2}
+      align="center"
+    >
       <InputGroup>
         <InputLeftElement pointerEvents="none">
           <SearchIcon color="gray.100" mb={1} />
@@ -20,7 +26,7 @@ const SearchInput = ({ user }: SearchInputProps) => {
         <Input
           type="search"
           placeholder="Pesquisar..."
-          fontSize="10pt"
+          fontSize="sm"
           height="34px"
           background="gray.800"
           paddingLeft={10}

@@ -136,7 +136,7 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
 
         <ModalContent>
@@ -153,12 +153,12 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
             <Divider />
 
             <ModalCloseButton />
-            <ModalBody display="flex" flexDirection="column" padding="10px 0px">
-              <Text fontSize={15} fontWeight={600}>
+            <ModalBody display="flex" flexDirection="column" paddingY="10px">
+              <Text fontSize="md" fontWeight={600}>
                 Nome
               </Text>
 
-              <Text fontSize={11} color="gray.500">
+              <Text fontSize="xs" color="gray.500">
                 Comunidades incluindo letras maiúsculas não podem ser alteradas.
               </Text>
 
@@ -180,20 +180,20 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
               />
 
               <Text
-                fontSize="9pt"
+                fontSize="xs"
                 color={charsRemaining === 0 ? 'red.500' : 'gray.400'}
               >
                 {charsRemaining} caracteres restantes
               </Text>
 
               {error && (
-                <Text fontSize="9pt" color="red.500">
+                <Text fontSize="xs" color="red.500">
                   {error}
                 </Text>
               )}
 
               <Box marginY={4}>
-                <Text fontSize={15} fontWeight={600}>
+                <Text fontSize="md" fontWeight={600}>
                   Tipo de comunidade
                 </Text>
 

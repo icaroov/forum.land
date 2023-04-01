@@ -1,4 +1,4 @@
-import { Avatar, Text } from '@chakra-ui/react'
+import { Avatar, Flex, Text } from '@chakra-ui/react'
 
 import { UserType } from '@shared/types/user.type'
 
@@ -10,15 +10,26 @@ const UserAvatar = ({ user }: UserAvatarProps) => {
   if (!user?.displayName) return null
 
   return (
-    <>
+    <Flex
+      sx={{
+        alignItems: 'center',
+        gap: 3
+      }}
+    >
       <Avatar
         name={user.displayName || user.email || ''}
         src={user.photoURL || ''}
-        height="100%"
+        size="sm"
       />
 
-      <Text>{user.displayName}</Text>
-    </>
+      <Text
+        sx={{
+          fontSize: ['sm', null, 'md']
+        }}
+      >
+        {user.displayName}
+      </Text>
+    </Flex>
   )
 }
 

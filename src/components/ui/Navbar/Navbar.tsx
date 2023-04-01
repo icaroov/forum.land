@@ -20,9 +20,10 @@ const Navbar = ({ user }: NavbarProps) => (
     <Flex
       as="nav"
       bg="gray.800"
-      height="55px"
+      height={70}
       padding="6px 12px"
       justify={{ md: 'space-between' }}
+      align="center"
       borderBottomEndRadius="md"
       borderBottomStartRadius="md"
     >

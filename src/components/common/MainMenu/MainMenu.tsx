@@ -2,7 +2,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Flex, Icon, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react'
 import { TiHome } from 'react-icons/ti'
 
-import CommunitiesMenu from '../CommunitiesMenu'
+import CommunitiesMenu from '@components/common/CommunitiesMenu'
 
 const ICONS = {
   HOME: TiHome,
@@ -14,7 +14,7 @@ const MainMenu = () => {
     <Menu>
       <MenuButton
         cursor="pointer"
-        padding="0x 6x"
+        paddingX={2}
         borderRadius={4}
         transition="all 0.2s"
         marginRight={2}
@@ -37,7 +37,7 @@ const MainMenu = () => {
             />
 
             <Flex display={{ base: 'none', lg: 'flex' }}>
-              <Text fontSize="10pt">Início</Text>
+              <Text fontSize={['sm', null, 'md']}>Início</Text>
             </Flex>
           </Flex>
 

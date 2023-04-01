@@ -87,7 +87,7 @@ const LoginForm = () => {
 
       <Divider orientation="horizontal" mt={4} mb={4} />
 
-      <Flex fontSize="9pt" justifyContent="center">
+      <Flex fontSize="sm" justifyContent="center">
         <Text mr={1}>Ainda não possui uma conta?</Text>
         <Text
           fontWeight={700}

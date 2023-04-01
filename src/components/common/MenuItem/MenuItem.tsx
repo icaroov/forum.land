@@ -22,7 +22,7 @@ const MenuItem = ({
   size = 20
 }: MenuItemProps) => (
   <ChakraMenuItem
-    fontSize="sm"
+    fontSize={['sm', null, 'md']}
     fontWeight={700}
     onClick={onClick}
     _hover={{ bg: 'pink.500', color: 'white' }}

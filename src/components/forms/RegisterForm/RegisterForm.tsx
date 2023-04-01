@@ -94,7 +94,7 @@ const RegisterForm = () => {
 
       <Divider orientation="horizontal" mt={4} mb={4} />
 
-      <Flex fontSize="9pt" justifyContent="center">
+      <Flex fontSize="sm" justifyContent="center">
         <Text mr={1}>Já tem uma conta?</Text>
         <Text
           color="pink.500"

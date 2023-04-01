@@ -48,7 +48,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
     <Menu>
       <MenuButton
         cursor="pointer"
-        padding="0x 6x"
+        paddingX={2}
         borderRadius={4}
         transition="all 0.2s ease-in-out"
         _hover={{
@@ -69,7 +69,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
                 <Flex
                   display={{ base: 'none', lg: 'flex' }}
                   direction="column"
-                  fontSize="8pt"
+                  fontSize={['sm', null, 'md']}
                   align="flex-start"
                   marginRight={8}
                 >

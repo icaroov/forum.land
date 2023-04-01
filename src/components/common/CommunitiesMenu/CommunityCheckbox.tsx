@@ -52,11 +52,11 @@ const CommunityCheckbox = ({
       <Flex alignItems="center">
         <Icon as={ICONS[name]} color="gray.500" marginRight={2} />
 
-        <Text fontSize="10pt" marginRight={1} fontWeight={600}>
+        <Text fontSize={['sm', null, 'md']} marginRight={1} fontWeight={600}>
           {community}
         </Text>
 
-        <Text fontSize="8pt" color="gray.400" paddingTop={1}>
+        <Text fontSize="9pt" color="gray.400" paddingTop={1}>
           {commuityTypeDescription}
         </Text>
       </Flex>
