@@ -24,7 +24,7 @@ import { authModalAtom } from '@atoms/authModalAtom'
 
 import type { UserType } from '@shared/types/user.type'
 
-import MenuItem from '../MenuItem'
+import MenuItem from '@components/common/MenuItem'
 
 const ICONS = {
   REDDIT: FaRedditSquare,
@@ -40,12 +40,6 @@ export type UserMenuProps = {
 }
 
 const UserMenu = ({ user }: UserMenuProps) => {
-  // const trans = {
-  //   profile: t('profile'),
-  //   logout: t('logout'),
-  //   loginOrRegister: t('loginOrRegister')
-  // }
-
   const setAuthModalState = useSetRecoilState(authModalAtom)
 
   const username = user?.displayName || user?.email?.split('@')[0]
@@ -56,7 +50,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
         cursor="pointer"
         padding="0x 6x"
         borderRadius={4}
-        transition="all 0.2s"
+        transition="all 0.2s ease-in-out"
         _hover={{
           outline: '1px solid',
           outlineColor: 'gray.400'
