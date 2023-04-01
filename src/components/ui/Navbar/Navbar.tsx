@@ -23,6 +23,8 @@ const Navbar = ({ user }: NavbarProps) => (
       height="55px"
       padding="6px 12px"
       justify={{ md: 'space-between' }}
+      borderBottomEndRadius="md"
+      borderBottomStartRadius="md"
     >
       <Flex align="center" width={['40px', 'auto']} marginRight={[0, 2]}>
         <Logo />

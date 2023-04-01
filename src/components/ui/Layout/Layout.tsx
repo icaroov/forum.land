@@ -1,3 +1,5 @@
+import { Container } from '@chakra-ui/react'
+
 import { UserType } from '@shared/types/user.type'
 
 import Navbar from '../Navbar'
@@ -9,11 +11,11 @@ type LayoutProps = {
 
 const Layout = ({ children, user }: LayoutProps) => {
   return (
-    <>
+    <Container maxW="1700px" paddingX={0}>
       <Navbar user={user} />
 
       <main>{children}</main>
-    </>
+    </Container>
   )
 }
 
