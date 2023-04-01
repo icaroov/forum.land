@@ -1,4 +1,4 @@
-import { ThemeConfig, extendTheme } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
 import { Styles } from '@chakra-ui/theme-tools'
 import '@fontsource/open-sans/300.css'
 import '@fontsource/open-sans/400.css'
@@ -6,15 +6,6 @@ import '@fontsource/open-sans/600.css'
 import '@fontsource/open-sans/700.css'
 
 import { ButtonStyles } from '@src/styles/common/button'
-
-const config: ThemeConfig = {
-  initialColorMode: 'dark',
-  useSystemColorMode: false
-}
-
-const fonts = {
-  main: 'Open Sans, sans-serif'
-}
 
 const styles: Styles = {
   global: ({ colorMode }) => ({
@@ -28,9 +19,14 @@ const styles: Styles = {
 }
 
 const theme = extendTheme({
-  config,
-  fonts,
   styles,
+  config: {
+    initialColorMode: 'dark',
+    useSystemColorMode: false
+  },
+  fonts: {
+    main: 'Open Sans, sans-serif'
+  },
   colors: {
     custom: {
       green: '#50fa7b',
@@ -54,7 +50,7 @@ const theme = extendTheme({
     }
   },
   components: {
-    ButtonStyles
+    Button: ButtonStyles
   }
 })
 

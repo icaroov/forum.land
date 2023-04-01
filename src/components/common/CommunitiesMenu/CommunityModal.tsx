@@ -14,7 +14,8 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
-import Input from '../Input'
+import Input from '@components/common/Input'
+
 import CommunityCheckbox, { CommunityType } from './CommunityCheckbox'
 
 type CommunityModalProps = {
@@ -129,18 +130,11 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
           </Box>
 
           <ModalFooter background="gray.600" borderRadius="0px 0px 10px 10px">
-            <Button
-              marginRight={3}
-              variant="outline"
-              height="30px"
-              onClick={onClose}
-            >
+            <Button marginRight={3} variant="outline" onClick={onClose}>
               Cancelar
             </Button>
 
-            <Button height="30px" background="pink.500">
-              Criar comunidade
-            </Button>
+            <Button variant="solid">Criar comunidade</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

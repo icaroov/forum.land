@@ -3,7 +3,7 @@ import { Text } from '@chakra-ui/react'
 const Logo = () => {
   return (
     <Text
-      fontSize="2xl"
+      fontSize="xl"
       fontWeight={700}
       sx={{
         '& strong': {

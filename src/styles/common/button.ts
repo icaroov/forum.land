@@ -25,18 +25,24 @@ export const ButtonStyles: ComponentStyleConfig = {
   variants: {
     solid: {
       color: 'white',
-      bg: 'pink.500',
+      height: '30px',
+      background: 'pink.500',
       _hover: {
-        bg: 'pink.400'
+        background: 'pink.400'
+      },
+      _disabled: {
+        color: 'pink.500'
       }
     },
     outline: {
-      color: 'pink.400',
+      background: 'transparent',
+      color: 'pink.500',
+      height: '30px',
       border: '1px solid',
       borderColor: 'pink.500'
     },
     oauth: {
-      height: '34px',
+      height: '30px',
       border: '1px solid',
       borderColor: 'gray.300',
       _hover: {

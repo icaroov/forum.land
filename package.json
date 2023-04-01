@@ -1,8 +1,8 @@
 {
-  "name": "raptor",
-  "description": "",
+  "name": "forum.land",
+  "description": "This is a forum webapp inspired by the Reddit made with NextJS, Firebase and Chakra UI",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "author": "Icaro Oliveira <icarovinici@gmail.com>",
   "license": "MIT",
   "keywords": [
