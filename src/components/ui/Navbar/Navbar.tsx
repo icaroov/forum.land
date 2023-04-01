@@ -1,10 +1,11 @@
-import { Flex, Image } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 
 import type { UserType } from '@shared/types/user.type'
 
 import AuthModal from '@components/auth/AuthModal'
 import MainMenu from '@components/common/MainMenu'
 import SearchInput from '@components/common/SearchInput'
+import Logo from '@components/ui/Logo'
 
 import NavbarRightContent from './components/NavbarRightContent'
 
@@ -24,19 +25,7 @@ const Navbar = ({ user }: NavbarProps) => (
       justify={{ md: 'space-between' }}
     >
       <Flex align="center" width={['40px', 'auto']} marginRight={[0, 2]}>
-        <Image
-          src="assets/img/reddit-face.svg"
-          height="30px"
-          mr={{
-            md: '0px',
-            sm: '8px'
-          }}
-        />
-        <Image
-          src="assets/img/reddit-text.svg"
-          height="46px"
-          display={{ base: 'none', md: 'unset' }}
-        />
+        <Logo />
       </Flex>
 
       {user && <MainMenu />}
