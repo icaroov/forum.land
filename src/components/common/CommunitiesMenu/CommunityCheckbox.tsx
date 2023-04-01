@@ -2,7 +2,11 @@ import { Checkbox, Flex, Icon, Text } from '@chakra-ui/react'
 import { BsFillEyeFill, BsFillPersonFill } from 'react-icons/bs'
 import { HiLockClosed } from 'react-icons/hi'
 
-export type CommunityType = 'public' | 'restricted' | 'private'
+export enum CommunityType {
+  public = 'public',
+  restricted = 'restricted',
+  private = 'private'
+}
 
 type CommunityCheckboxProps = {
   name: CommunityType
@@ -35,13 +39,15 @@ const CommunityCheckbox = ({
 }: CommunityCheckboxProps) => {
   const community = communityTypeOptions[name]
   const commuityTypeDescription = communityTypeDescriptions[name]
+  const isChecked = communityType === community || communityType === name
 
   return (
     <Checkbox
       name={community}
-      isChecked={communityType === community}
+      isChecked={isChecked}
       onChange={onChange}
       colorScheme="pink"
+      value={name}
     >
       <Flex alignItems="center">
         <Icon as={ICONS[name]} color="gray.500" marginRight={2} />

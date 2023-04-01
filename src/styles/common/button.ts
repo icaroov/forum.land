@@ -31,7 +31,10 @@ export const ButtonStyles: ComponentStyleConfig = {
         background: 'pink.400'
       },
       _disabled: {
-        color: 'pink.500'
+        color: 'pink.400',
+        opacity: 0.4,
+        cursor: 'not-allowed',
+        background: 'whiteAlpha.200'
       }
     },
     outline: {

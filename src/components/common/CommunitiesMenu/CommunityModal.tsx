@@ -10,13 +10,23 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Text
+  Text,
+  useToast
 } from '@chakra-ui/react'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { serverTimestamp } from 'firebase/firestore'
 import { useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+import { firestore } from '@lib/firebase/clientApp'
+import { auth } from '@lib/firebase/clientApp'
 
 import Input from '@components/common/Input'
 
 import CommunityCheckbox, { CommunityType } from './CommunityCheckbox'
+
+const MINIMUM_CHARS = 21
+const MINIMUM_NAME_LENGTH = 3
 
 type CommunityModalProps = {
   isOpen: boolean
@@ -24,31 +34,104 @@ type CommunityModalProps = {
 }
 
 const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
+  const toast = useToast()
   const [communityName, setCommunityName] = useState('')
-  const [communityType, setCommunityType] = useState<CommunityType>('public')
-  const [charsRemaining, setCharsRemaining] = useState(21)
+  const [communityType, setCommunityType] = useState(CommunityType.public)
+  const [charsRemaining, setCharsRemaining] = useState(MINIMUM_CHARS)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const [user] = useAuthState(auth)
 
   const handleCommunityNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (error) setError('')
+
     const { value } = event.target
 
-    if (value.length > 21) return
+    if (value.length > MINIMUM_CHARS) return
 
     setCommunityName(value)
-    setCharsRemaining(21 - value.length)
+    setCharsRemaining(MINIMUM_CHARS - value.length)
   }
 
   const handleCommunityTypeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const {
-      target: { name }
+      target: { value }
     } = event
 
-    if (name === communityType) return
+    if (value === communityType) return
 
-    setCommunityType(name as CommunityType)
+    setCommunityType(value as CommunityType)
+  }
+
+  const handleCreateCommunity = async () => {
+    if (error) setError('')
+
+    const format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/g
+
+    if (
+      format.test(communityName) ||
+      communityName.length < MINIMUM_NAME_LENGTH
+    ) {
+      setError(
+        `Nomes de comunidades devem ter no mínimo ${MINIMUM_NAME_LENGTH}
+         caracteres e não podem conter caracteres especiais.`
+      )
+
+      return
+    }
+
+    try {
+      setLoading(true)
+
+      const docRef = doc(firestore, 'communities', communityName)
+      const communityDoc = await getDoc(docRef)
+
+      if (communityDoc.exists()) {
+        throw new Error('Comunidade já existe, tente outro nome.')
+      }
+
+      const data = {
+        creatorId: user?.uid,
+        name: communityName,
+        privacyType: communityType,
+        membersCount: 1,
+        createdAt: serverTimestamp()
+      }
+
+      await setDoc(docRef, data)
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: 'Opss...',
+          description: error.message,
+          status: 'error',
+          duration: 4000,
+          isClosable: true
+        })
+      }
+
+      // eslint-disable-next-line no-console
+      console.error(error)
+    } finally {
+      setLoading(false)
+      setCommunityName('')
+      setCommunityType(CommunityType.public)
+
+      toast({
+        title: 'Sucesso!',
+        description: 'Comunidade criada com sucesso!',
+        status: 'success',
+        duration: 4000,
+        isClosable: true
+      })
+
+      onClose()
+    }
   }
 
   return (
@@ -88,18 +171,26 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
               >
                 r/
               </Text>
+
               <Input
                 position="relative"
                 paddingLeft="22px"
                 value={communityName}
                 onChange={handleCommunityNameChange}
               />
+
               <Text
                 fontSize="9pt"
                 color={charsRemaining === 0 ? 'red.500' : 'gray.400'}
               >
                 {charsRemaining} caracteres restantes
               </Text>
+
+              {error && (
+                <Text fontSize="9pt" color="red.500">
+                  {error}
+                </Text>
+              )}
 
               <Box marginY={4}>
                 <Text fontSize={15} fontWeight={600}>
@@ -108,19 +199,19 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
 
                 <Stack spacing={2}>
                   <CommunityCheckbox
-                    name="public"
+                    name={CommunityType.public}
                     communityType={communityType}
                     onChange={handleCommunityTypeChange}
                   />
 
                   <CommunityCheckbox
-                    name="restricted"
+                    name={CommunityType.restricted}
                     communityType={communityType}
                     onChange={handleCommunityTypeChange}
                   />
 
                   <CommunityCheckbox
-                    name="private"
+                    name={CommunityType.private}
                     communityType={communityType}
                     onChange={handleCommunityTypeChange}
                   />
@@ -134,7 +225,13 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
               Cancelar
             </Button>
 
-            <Button variant="solid">Criar comunidade</Button>
+            <Button
+              variant="solid"
+              onClick={handleCreateCommunity}
+              isLoading={loading}
+            >
+              Criar comunidade
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -13,7 +13,8 @@ const styles: Styles = {
       bg: colorMode === 'dark' ? '#282a36' : '#f8f9fa',
       color: colorMode === 'dark' ? '#ffffff' : '#282a36',
       fontSize: 'md',
-      lineHeight: 'tall'
+      lineHeight: 'tall',
+      fontFamily: 'main'
     }
   })
 }
