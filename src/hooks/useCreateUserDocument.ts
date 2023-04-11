@@ -15,6 +15,13 @@ export const useCreateUserDocument = () => {
       try {
         const docRef = doc(firestore, 'users', user.uid)
         await setDoc(docRef, user)
+
+        toast({
+          title: 'Benvenuto! 🎉',
+          status: 'success',
+          duration: 4000,
+          isClosable: true
+        })
       } catch (error) {
         if (error instanceof Error) {
           toast({

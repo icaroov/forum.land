@@ -2,15 +2,11 @@ import { Checkbox, Flex, Icon, Text } from '@chakra-ui/react'
 import { BsFillEyeFill, BsFillPersonFill } from 'react-icons/bs'
 import { HiLockClosed } from 'react-icons/hi'
 
-export enum CommunityType {
-  public = 'public',
-  restricted = 'restricted',
-  private = 'private'
-}
+import { COMMUNITY_PRIVACY_TYPE } from '@src/shared/types/community.type'
 
 type CommunityCheckboxProps = {
-  name: CommunityType
-  communityType: CommunityType
+  name: COMMUNITY_PRIVACY_TYPE
+  communityType: COMMUNITY_PRIVACY_TYPE
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 

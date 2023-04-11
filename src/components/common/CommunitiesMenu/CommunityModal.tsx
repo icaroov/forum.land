@@ -18,12 +18,17 @@ import { serverTimestamp } from 'firebase/firestore'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
+import {
+  COMMUNITY_PRIVACY_TYPE,
+  CommunityType
+} from '@src/shared/types/community.type'
+
 import { firestore } from '@lib/firebase/clientApp'
 import { auth } from '@lib/firebase/clientApp'
 
 import Input from '@components/common/Input'
 
-import CommunityCheckbox, { CommunityType } from './CommunityCheckbox'
+import CommunityCheckbox from './CommunityCheckbox'
 
 const MINIMUM_CHARS = 21
 const MINIMUM_NAME_LENGTH = 3
@@ -35,8 +40,11 @@ type CommunityModalProps = {
 
 const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
   const toast = useToast()
+
   const [communityName, setCommunityName] = useState('')
-  const [communityType, setCommunityType] = useState(CommunityType.public)
+  const [communityType, setCommunityType] = useState(
+    COMMUNITY_PRIVACY_TYPE.PUBLIC
+  )
   const [charsRemaining, setCharsRemaining] = useState(MINIMUM_CHARS)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -65,7 +73,7 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
 
     if (value === communityType) return
 
-    setCommunityType(value as CommunityType)
+    setCommunityType(value as COMMUNITY_PRIVACY_TYPE)
   }
 
   const handleCreateCommunity = async () => {
@@ -95,25 +103,26 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
         throw new Error('Comunidade já existe, tente outro nome.')
       }
 
-      const data = {
-        creatorId: user?.uid,
+      const community: CommunityType = {
         name: communityName,
-        privacyType: communityType,
         membersCount: 1,
+        creatorId: user?.uid,
+        privacyType: communityType,
         createdAt: serverTimestamp()
       }
 
-      await setDoc(docRef, data)
+      await setDoc(docRef, community)
     } catch (error) {
       if (error instanceof Error) {
         toast({
-          title: 'Opss...',
+          title: 'Erro ao criar comunidade.',
           description: error.message,
           status: 'error',
           duration: 4000,
           isClosable: true
         })
       }
+
       toast({
         title: 'Algo deu errado...',
         status: 'error',
@@ -123,7 +132,7 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
     } finally {
       setLoading(false)
       setCommunityName('')
-      setCommunityType(CommunityType.public)
+      setCommunityType(COMMUNITY_PRIVACY_TYPE.PUBLIC)
 
       toast({
         title: 'Sucesso!',
@@ -202,19 +211,19 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
 
                 <Stack spacing={2}>
                   <CommunityCheckbox
-                    name={CommunityType.public}
+                    name={COMMUNITY_PRIVACY_TYPE.PUBLIC}
                     communityType={communityType}
                     onChange={handleCommunityTypeChange}
                   />
 
                   <CommunityCheckbox
-                    name={CommunityType.restricted}
+                    name={COMMUNITY_PRIVACY_TYPE.RESTRICTED}
                     communityType={communityType}
                     onChange={handleCommunityTypeChange}
                   />
 
                   <CommunityCheckbox
-                    name={CommunityType.private}
+                    name={COMMUNITY_PRIVACY_TYPE.PRIVATE}
                     communityType={communityType}
                     onChange={handleCommunityTypeChange}
                   />
