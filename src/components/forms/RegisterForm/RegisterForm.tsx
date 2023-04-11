@@ -1,10 +1,12 @@
 import { Button, Divider, Flex, Text } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useSetRecoilState } from 'recoil'
 
 import { FIREBASE_ERRORS } from '@src/constants/firebase'
+import { useCreateUserDocument } from '@src/hooks/useCreateUserDocument'
 import { ViewEnum } from '@src/shared/enums/View.enum'
+import { UserType } from '@src/shared/types/user.type'
 
 import { auth } from '@lib/firebase/clientApp'
 
@@ -21,7 +23,9 @@ const RegisterForm = () => {
 
   const setAuthModalState = useSetRecoilState(authModalAtom)
 
-  const [createUserWithEmailAndPassword, _, loading, userError] =
+  const createUserDocument = useCreateUserDocument()
+
+  const [createUserWithEmailAndPassword, userCredential, loading, userError] =
     useCreateUserWithEmailAndPassword(auth)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +39,7 @@ const RegisterForm = () => {
     }
 
     if (data.password !== data.confirmPassword) {
-      setError('Senhas não conferem')
+      setError('Senhas não conferem.')
       return
     }
 
@@ -45,6 +49,20 @@ const RegisterForm = () => {
   const handleClickLogin = () => {
     setAuthModalState(prev => ({ ...prev, view: ViewEnum.LOGIN }))
   }
+
+  useEffect(() => {
+    if (userCredential) {
+      const user: Partial<UserType> = {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
+        photoURL: userCredential.user.photoURL,
+        providerData: userCredential.user.providerData
+      }
+
+      createUserDocument(user)
+    }
+  }, [userCredential, createUserDocument])
 
   return (
     <form onSubmit={handleSubmit} data-testid="register-form">

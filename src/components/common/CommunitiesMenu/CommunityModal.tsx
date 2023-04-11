@@ -114,9 +114,12 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
           isClosable: true
         })
       }
-
-      // eslint-disable-next-line no-console
-      console.error(error)
+      toast({
+        title: 'Algo deu errado...',
+        status: 'error',
+        duration: 4000,
+        isClosable: true
+      })
     } finally {
       setLoading(false)
       setCommunityName('')

@@ -8,12 +8,14 @@ import {
   ModalOverlay,
   Text
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import {
   useSendPasswordResetEmail,
   useSignInWithGoogle
 } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
+
+import { useCreateUserDocument } from '@src/hooks/useCreateUserDocument'
 
 import { auth } from '@lib/firebase/clientApp'
 
@@ -32,11 +34,18 @@ type AuthModalProps = {
 
 const AuthModal = ({ user }: AuthModalProps) => {
   const [{ isOpen, view }, setModalState] = useRecoilState(authModalAtom)
-  const [signInWithGoogle, _, loading, signInError] = useSignInWithGoogle(auth)
+
+  const [signInWithGoogle, userCredential, loading, signInError] =
+    useSignInWithGoogle(auth)
   const [sendPasswordResetEmail, sending, sendPasswordError] =
     useSendPasswordResetEmail(auth)
 
-  const handleClose = () => setModalState(prev => ({ ...prev, isOpen: false }))
+  const handleClose = useCallback(
+    () => setModalState(prev => ({ ...prev, isOpen: false })),
+    [setModalState]
+  )
+
+  const createUserDocument = useCreateUserDocument()
 
   const isLoginView = view === ViewEnum.LOGIN
   const isRegisterView = view === ViewEnum.REGISTER
@@ -44,8 +53,21 @@ const AuthModal = ({ user }: AuthModalProps) => {
 
   useEffect(() => {
     if (user) handleClose()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
+  }, [user, handleClose])
+
+  useEffect(() => {
+    if (userCredential) {
+      const user: Partial<UserType> = {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
+        photoURL: userCredential.user.photoURL,
+        providerData: userCredential.user.providerData
+      }
+
+      createUserDocument(user)
+    }
+  }, [userCredential, createUserDocument])
 
   return (
     <ChakraModal isOpen={isOpen} onClose={handleClose}>
