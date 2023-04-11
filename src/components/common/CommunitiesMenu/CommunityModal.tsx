@@ -13,13 +13,14 @@ import {
   Text,
   useToast
 } from '@chakra-ui/react'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, runTransaction } from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import {
   COMMUNITY_PRIVACY_TYPE,
+  CommunitySnippetType,
   CommunityType
 } from '@src/shared/types/community.type'
 
@@ -97,21 +98,34 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
       setLoading(true)
 
       const docRef = doc(firestore, 'communities', communityName)
-      const communityDoc = await getDoc(docRef)
 
-      if (communityDoc.exists()) {
-        throw new Error('Comunidade já existe, tente outro nome.')
-      }
+      await runTransaction(firestore, async transaction => {
+        const communityDoc = await transaction.get(docRef)
 
-      const community: CommunityType = {
-        name: communityName,
-        membersCount: 1,
-        creatorId: user?.uid,
-        privacyType: communityType,
-        createdAt: serverTimestamp()
-      }
+        if (communityDoc.exists()) {
+          throw new Error('Comunidade já existe, tente outro nome.')
+        }
 
-      await setDoc(docRef, community)
+        const community: CommunityType = {
+          name: communityName,
+          membersCount: 1,
+          creatorId: user?.uid,
+          privacyType: communityType,
+          createdAt: serverTimestamp()
+        }
+
+        transaction.set(docRef, community)
+
+        const communitySnippet: CommunitySnippetType = {
+          communityId: communityName,
+          isModerator: true
+        }
+
+        transaction.set(
+          doc(firestore, `users/${user?.uid}/communitySnippets`, communityName),
+          communitySnippet
+        )
+      })
     } catch (error) {
       if (error instanceof Error) {
         toast({

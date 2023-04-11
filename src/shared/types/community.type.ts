@@ -13,3 +13,8 @@ export type CommunityType = {
   membersCount: number
   privacyType: COMMUNITY_PRIVACY_TYPE
 }
+
+export type CommunitySnippetType = {
+  communityId: string
+  isModerator: boolean
+}
