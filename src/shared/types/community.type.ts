@@ -7,11 +7,13 @@ export enum COMMUNITY_PRIVACY_TYPE {
 }
 
 export type CommunityType = {
+  id?: string
   name: string
   creatorId: string | undefined
-  createdAt: FieldValue
   membersCount: number
   privacyType: COMMUNITY_PRIVACY_TYPE
+  createdAt?: FieldValue
+  imageURL?: string
 }
 
 export type CommunitySnippetType = {
