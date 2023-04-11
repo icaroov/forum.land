@@ -1,18 +1,20 @@
 import { Container } from '@chakra-ui/react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
-import { UserType } from '@shared/types/user.type'
+import { auth } from '@src/lib/firebase/clientApp'
 
 import Navbar from '../Navbar'
 
 type LayoutProps = {
   children: React.ReactNode
-  user: UserType
 }
 
-const Layout = ({ children, user }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
+  const [user] = useAuthState(auth)
+
   return (
     <Container maxW="1700px" paddingX={0}>
-      <Navbar user={user} />
+      {user && <Navbar user={user} />}
 
       <main>{children}</main>
     </Container>
