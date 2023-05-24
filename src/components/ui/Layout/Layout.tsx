@@ -14,7 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <Container maxW="1700px" paddingX={0}>
-      {user && <Navbar user={user} />}
+      <Navbar user={user} />
 
       <main>{children}</main>
     </Container>

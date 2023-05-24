@@ -16,7 +16,7 @@ const BasicPage = ({ children, meta }: BasicPageProps) => {
     <>
       {!!meta && (
         <Head>
-          <title>{`${meta.title} | Reddit`}</title>
+          <title>{`${meta.title} | FORUMLAND`}</title>
         </Head>
       )}
 
