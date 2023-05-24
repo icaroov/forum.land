@@ -11,10 +11,6 @@ type CommunityHeaderProps = {
 const CommunityHeader = ({ community }: CommunityHeaderProps) => {
   const isJoined = false
 
-  const handleJoinOrLeave = () => {
-    console.log('handleJoinOrLeave')
-  }
-
   const communityImage = (
     <>
       {community.imageURL ? (
@@ -107,10 +103,7 @@ const CommunityHeader = ({ community }: CommunityHeaderProps) => {
               </Text>
             </Flex>
 
-            <Button
-              variant={isJoined ? 'outline' : 'solid'}
-              onClick={handleJoinOrLeave}
-            >
+            <Button variant={isJoined ? 'outline' : 'solid'}>
               {isJoined ? 'Sair' : 'Participar'}
             </Button>
           </Flex>
