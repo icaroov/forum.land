@@ -13,18 +13,12 @@ import {
   Text,
   useToast
 } from '@chakra-ui/react'
-import { doc, runTransaction } from 'firebase/firestore'
-import { serverTimestamp } from 'firebase/firestore'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
-import {
-  COMMUNITY_PRIVACY_TYPE,
-  CommunitySnippetType,
-  CommunityType
-} from '@src/shared/types/community.type'
+import { useCreateCommunity } from '@src/hooks/useCreateCommunity'
+import { COMMUNITY_PRIVACY_TYPE } from '@src/shared/types/community.type'
 
-import { firestore } from '@lib/firebase/clientApp'
 import { auth } from '@lib/firebase/clientApp'
 
 import Input from '@components/common/Input'
@@ -32,7 +26,6 @@ import Input from '@components/common/Input'
 import CommunityCheckbox from './CommunityCheckbox'
 
 const MINIMUM_CHARS = 21
-const MINIMUM_NAME_LENGTH = 3
 
 type CommunityModalProps = {
   isOpen: boolean
@@ -43,19 +36,18 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
   const toast = useToast()
 
   const [communityName, setCommunityName] = useState('')
+  const [charsRemaining, setCharsRemaining] = useState(MINIMUM_CHARS)
   const [communityType, setCommunityType] = useState(
     COMMUNITY_PRIVACY_TYPE.PUBLIC
   )
-  const [charsRemaining, setCharsRemaining] = useState(MINIMUM_CHARS)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const [user] = useAuthState(auth)
 
-  const handleCommunityNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (error) setError('')
+  const { createCommunity, loading, error, cleanErrorMessage } =
+    useCreateCommunity()
+
+  const handleCommunityNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (error) cleanErrorMessage()
 
     const { value } = event.target
 
@@ -65,9 +57,7 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
     setCharsRemaining(MINIMUM_CHARS - value.length)
   }
 
-  const handleCommunityTypeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleCommunityTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value }
     } = event
@@ -78,86 +68,25 @@ const CommunityModal = ({ isOpen, onClose }: CommunityModalProps) => {
   }
 
   const handleCreateCommunity = async () => {
-    if (error) setError('')
+    createCommunity({
+      communityName,
+      communityType,
+      currentUser: user,
+      onFinished: () => {
+        setCommunityName('')
+        setCommunityType(COMMUNITY_PRIVACY_TYPE.PUBLIC)
 
-    const format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/g
-
-    if (
-      format.test(communityName) ||
-      communityName.length < MINIMUM_NAME_LENGTH
-    ) {
-      setError(
-        `Nomes de comunidades devem ter no mínimo ${MINIMUM_NAME_LENGTH}
-         caracteres e não podem conter caracteres especiais.`
-      )
-
-      return
-    }
-
-    try {
-      setLoading(true)
-
-      const docRef = doc(firestore, 'communities', communityName)
-
-      await runTransaction(firestore, async transaction => {
-        const communityDoc = await transaction.get(docRef)
-
-        if (communityDoc.exists()) {
-          throw new Error('Comunidade já existe, tente outro nome.')
-        }
-
-        const community: CommunityType = {
-          name: communityName,
-          membersCount: 1,
-          creatorId: user?.uid,
-          privacyType: communityType,
-          createdAt: serverTimestamp()
-        }
-
-        transaction.set(docRef, community)
-
-        const communitySnippet: CommunitySnippetType = {
-          communityId: communityName,
-          isModerator: true
-        }
-
-        transaction.set(
-          doc(firestore, `users/${user?.uid}/communitySnippets`, communityName),
-          communitySnippet
-        )
-      })
-    } catch (error) {
-      if (error instanceof Error) {
         toast({
-          title: 'Erro ao criar comunidade.',
-          description: error.message,
-          status: 'error',
+          title: 'Sucesso!',
+          description: 'Comunidade criada com sucesso!',
+          status: 'success',
           duration: 4000,
           isClosable: true
         })
+
+        onClose()
       }
-
-      toast({
-        title: 'Algo deu errado...',
-        status: 'error',
-        duration: 4000,
-        isClosable: true
-      })
-    } finally {
-      setLoading(false)
-      setCommunityName('')
-      setCommunityType(COMMUNITY_PRIVACY_TYPE.PUBLIC)
-
-      toast({
-        title: 'Sucesso!',
-        description: 'Comunidade criada com sucesso!',
-        status: 'success',
-        duration: 4000,
-        isClosable: true
-      })
-
-      onClose()
-    }
+    })
   }
 
   return (

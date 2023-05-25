@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react'
 
 import { CommunityType } from '@src/shared/types/community.type'
 
-import PageContent from '../PageContent/PageContent'
+import PageContent from '../PageContent'
 import CommunityHeader from './CommunityHeader'
 
 type CommunityProps = {
